@@ -7,7 +7,7 @@ USE PaintingDB
 CREATE OR REPLACE TABLE paintings
 (	id INT AUTO_INCREMENT, 
 	imagefile MEDIUMBLOB NOT NULL,
-	year YEAR(4) NOT NULL, 
+	year YEAR NOT NULL, 
 	artist VARCHAR(80) NOT NULL,
 	medium VARCHAR(80) NOT NULL,
 	style VARCHAR(35) NOT NULL,
@@ -16,8 +16,8 @@ CREATE OR REPLACE TABLE paintings
 GO
 
 INSERT INTO paintings 
-(imageFile, year, artist, medium, style) 
+(imageFile, year, artist, medium, style)
 VALUES 
-('UklGRkoCAABXRUJQVlA4TD4CAAAv4AA4EN+AkI0kDcIgPMKhPOqjPMIgHI5BtpGG8AiHcAiP/EiPMASDbCMN4RAO6dEf4RCGMP8BWBeRb4XFYw7zHx6cwErF4+EotQIlVeUGgVE7N2eoKQwUbduO2zZUGIXUPHgE9f9fevFAUJnagqu+J6L/E9B9+f/L/1/+/5/lZ9tPdItXFwAOegQWuekRWHnQo9a4AWdtVvSsx/I55/L1BvRsO+NYbloA0P2R/ycqC3CumJm5zpDKb1qQgEkf8aY8adsBMFXMJGCKH7qJD+V9vNfVgRedKied4h7Y6BE41D7GZ9stRdIaCZjiXs+2jzMXy64XvCjx3vZZj+WbuFeXE++1kXjRGUkX6YFJH0tPuhaQTUDmxTbxXs/lvT6ee9JG4sV20kV64PETJl0L0BclnrFXgOUmoCXROZRPMxMwaKrY/Um2Stm9beIh3i4O0P1x/pdrazszAZlrPAI1rjoC6wMvtpPadsFWB6Dgqt9tZwag2gAkbRLQGS9KuVUGHYGCQb8Bk24ro43fiwI4prZtn3QARk3ApD+A7ZLEL5q0Nci+2OZ5T/EIDLotf9OPWLIj0P3G2yB90eew7U5PwBgPtUfgpP4D/E9U9sV2Ncdd5b32wKsCdH+mbVDhS8Vuybvtq+5sv6ttX7TteN67XuNNea8rECdgq3fbGb3Ed21fRiBzBXrdlF/0BKw8AAx6iWf0erfdvmQLeqAgewVWHvSuxJdy9G67fckOsWNi/yW2QX1cQNzQfMYFn/GaRLsI', 1999, 'TestArtist', 'TestMedium', 'TestStyle')
+('temporaryfilename I used phpmyadmin to add image instead of placing blob here because its effing yuge', 1999, 'TestArtist', 'TestMedium', 'TestStyle')
 ;
 GO
