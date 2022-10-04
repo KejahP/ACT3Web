@@ -1,0 +1,9 @@
+CREATE OR REPLACE TABLE paintings
+(	`id` INT AUTO_INCREMENT, 
+	`imagefile` MEDIUMBLOB NOT NULL,
+	`year` YEAR(4) NOT NULL, 
+	`artist` VARCHAR(80) NOT NULL,
+	`medium` VARCHAR(80) NOT NULL,
+	`style` VARCHAR(35) NOT NULL,)
+;
+GO
