@@ -1,0 +1,30 @@
+li {
+    list-style: none;
+}
+
+.outline {
+    border: 1px solid black;
+}
+
+.mainContentAlignment {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+
+
+.searchSizing {
+    width: 50%;
+}
+
+nav>div {
+    background-color: rgba(223, 187, 135, 0.75);
+}
+
+.navStyle {
+    background-image: url("https://www.shbarcelona.com/blog/en/wp-content/uploads/2017/09/art-gallery.jpg");
+    background-position: center;
+    background-size: auto;
+    font-weight: bold;
+}
