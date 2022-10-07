@@ -6,18 +6,11 @@ USE PaintingDB
 
 CREATE OR REPLACE TABLE paintings
 (	id INT AUTO_INCREMENT, 
+	name VARCHAR(35) NOT NULL,
 	imagefile MEDIUMBLOB NOT NULL,
-	year YEAR NOT NULL, 
+	year INT NOT NULL, 
 	artist VARCHAR(80) NOT NULL,
 	medium VARCHAR(80) NOT NULL,
 	style VARCHAR(35) NOT NULL,
 	PRIMARY KEY (`id`))
 ;
-GO
-
-INSERT INTO paintings 
-(imageFile, year, artist, medium, style)
-VALUES 
-('temporaryfilename I used phpmyadmin to add image instead of placing blob here because its effing yuge', 1999, 'TestArtist', 'TestMedium', 'TestStyle')
-;
-GO
