@@ -14,20 +14,25 @@
     <nav class="navStyle row ">
         <div class="col"></div>
         <div class="col p-2">
-            <ul class="d-flex list-format align-items-center justify-content-center">
-                <li>
+            <ul class="d-flex align-items-center justify-content-center">
+                <li class="horizontalSpacing">
                     <a href=" index.php">
                         Home
+                    </a>
+                </li>
+                <li class="horizontalSpacing">
+                    <a href=" template_table.php">
+                        Browse
                     </a>
                 </li>
                 <li class="dropdown">
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Sort by</button>
                     <ul class="dropdown-menu">
                         <li class="dropdown-item">
-                            <a href="template_table.php">Table Template</a>
+                            <a method="post" href="template_table.php?style=1">Style</a>
                         </li>
                         <li class="dropdown-item">
-                            <a href="template_table.php">Table Template</a>
+                            <a method="post" href="template_table.php?artist=1">Artist</a>
                         </li>
                     </ul>
                 </li>

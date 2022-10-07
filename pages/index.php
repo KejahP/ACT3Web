@@ -10,7 +10,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
 <body>
     <?php include_once(dirname(__DIR__) . '/shared/navbar.php'); ?>
     <main class="mainContentAlignment outline">
-        <h1>Landing Page</h1>
+        <h1>Home Page</h1>
         <div class="container text-center">
             <p>
                 Manager: Kejah Pulman (30034444)
