@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <?php
 $selection = 'browse';
 if (isset($_GET['style'])) {
@@ -9,7 +6,8 @@ if (isset($_GET['style'])) {
     $selection = 'artist';
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="en">
 
 <?php
 include_once(dirname(__DIR__) . '/shared/head.php');
@@ -46,6 +44,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
             <thead>
                 <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Image</th>
                     <th scope="col">Year</th>
                     <th scope="col">Artist</th>
@@ -56,6 +55,9 @@ include_once(dirname(__DIR__) . '/shared/head.php');
             <?php
             include_once(dirname(__DIR__) . '/script/temp_connection.php');        //Currently set to connect to xampp using a copy of Andrews initial ConnectionHome.php in resources.
 
+            // NEW INCLUDE (FEEL FREE TO DELETE THIS COMMENT RHEESE)   
+            include_once(dirname(__DIR__) . '/script/painting_model.php');
+            
             //	IMAGES TABLE
             $sqlImages = "SELECT * FROM paintings";
             if ($selection == 'style') {
@@ -67,20 +69,22 @@ include_once(dirname(__DIR__) . '/shared/head.php');
             $stmtImages = $conn->prepare($sqlImages);
             $stmtImages->execute();
 
-            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH)) {
-
+            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH)) 
+            {
+                $a = painting::FromRow($row);
+                
                 echo '<tr>';
-                echo sprintf('<a method="post" href="template_single.php?id=%d">', $row['id']);
-                echo '<td>' . $row['id'] . '</td>';
+                #echo sprintf('<a method="post" href="template_single.php?id=%d">', $a->id);  
+                echo '<td><a method="post" href="template_single.php?id='.$a->id.'"> '.$a->id.' </a></td>';     
+                echo '<td>' .  $a->name . '</td>';
                 echo '<td>' .
-                    '<img src = "data:image/png;base64,' . base64_encode($row['imagefile']) . '" width = "300px" height = "300px"/>'
+                    $a->createImage("300px", "300px")       
                     . '</td>';
-                echo '<td>' . $row['year'] . ' </td>';
-                echo '<td>' . $row['artist'] . ' </td>';
-                echo '<td>' . $row['medium'] . ' </td>';
-                echo '<td>' . $row['style'] . ' </td>';
-                echo '<td> <a class=\'btn btn-primary\' method="post" href="template_single.php?id=' . $row['id'] . '">Go To</a>';
-
+                echo '<td>' . $a->year . ' </td>';
+                echo '<td>' . $a->year . ' </td>';
+                echo '<td>' . $a->medium . ' </td>';
+                echo '<td>' . $a->style . ' </td>';
+                echo '<td> <a class=\'btn btn-primary\' method="post" href="template_single.php?id=' . $a->id . '">Go To</a>';
                 echo '</a>';
                 echo '</tr>';
             }
