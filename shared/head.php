@@ -7,7 +7,7 @@
         M133320
         Contains the partial render for the head that includes all of the stylesheets to be used.
     -->
-    <meta charset="utf-8">
+    <meta charset="utf-8" http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>AT3 Sprint One</title>
     <!-- CSS -->

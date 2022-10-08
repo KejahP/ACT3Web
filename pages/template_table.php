@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <?php
 $selection = 'browse';
 if (isset($_GET['style'])) {
@@ -6,8 +9,7 @@ if (isset($_GET['style'])) {
     $selection = 'artist';
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
+
 
 <?php
 include_once(dirname(__DIR__) . '/shared/head.php');

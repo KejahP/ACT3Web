@@ -1,10 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <?php
 if (isset($_GET['id'])) {
     $painting_id = $_GET['id'];
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
 <?php
 include_once(dirname(__DIR__) . '/shared/head.php');

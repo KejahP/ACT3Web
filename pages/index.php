@@ -1,11 +1,9 @@
-<?php
-?>
 <!DOCTYPE html>
 <html lang="en">
-
 <?php
 include_once(dirname(__DIR__) . '/shared/head.php');
 ?>
+
 
 <body>
     <?php include_once(dirname(__DIR__) . '/shared/navbar.php'); ?>
@@ -22,7 +20,6 @@ include_once(dirname(__DIR__) . '/shared/head.php');
             </ul>
             </p>
         </div>
-
     </main>
 </body>
 
