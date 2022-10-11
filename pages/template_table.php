@@ -1,15 +1,21 @@
 <?php
-$selection = 'browse';
+$sqlImages = "SELECT * FROM paintings";
+$header = 'Browse';
 if (isset($_GET['style'])) {
-    $selection = 'style';
+    $painting_style = $_GET['style'];
+    $sqlImages = "SELECT * FROM paintings WHERE style = '$painting_style'";
+    $header = 'Style';
 } elseif (isset($_GET['artist'])) {
-    $selection = 'artist';
+    $painting_artist = $_GET['artist'];
+    $sqlImages = "SELECT * FROM paintings WHERE artist = '$painting_artist'";
+    $header = 'Artist';
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <?php
+include_once(dirname(__DIR__).'/script/painting_model.php');
 include_once(dirname(__DIR__) . '/shared/head.php');
 ?>
 
@@ -17,13 +23,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
     <?php include_once(dirname(__DIR__) . '/shared/navbar.php'); ?>
     <main class="mainContentAlignment outline">
         <?php
-        if ($selection == 'style') {
-            echo '<h1>Sorted by Style</h1>';
-        } elseif ($selection == 'artist') {
-            echo '<h1>Sorted by Artist</h1>';
-        } elseif ($selection == 'browse') {
-            echo '<h1>Browse Page</h1>';
-        }
+        echo '<h1>'.$header.'</h1>';
         ?>
 
         <div class="container text-center">
@@ -53,35 +53,22 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                 </tr>
             </thead>
             <?php
-            include_once(dirname(__DIR__) . '/script/temp_connection.php');        //Currently set to connect to xampp using a copy of Andrews initial ConnectionHome.php in resources.
-
-            // NEW INCLUDE (FEEL FREE TO DELETE THIS COMMENT RHEESE)   
-            include_once(dirname(__DIR__) . '/script/painting_model.php');
-            
-            //	IMAGES TABLE
-            $sqlImages = "SELECT * FROM paintings";
-            if ($selection == 'style') {
-                $sqlImages = "SELECT * FROM paintings ORDER BY style";
-            } elseif ($selection == 'artist') {
-                $sqlImages = "SELECT * FROM paintings ORDER BY artist";
-            }
 
             $stmtImages = $conn->prepare($sqlImages);
             $stmtImages->execute();
 
-            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH)) 
-            {
+            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH)) {
                 $a = painting::FromRow($row);
-                
+
                 echo '<tr>';
                 #echo sprintf('<a method="post" href="template_single.php?id=%d">', $a->id);  
-                echo '<td><a method="post" href="template_single.php?id='.$a->id.'"> '.$a->id.' </a></td>';     
+                echo '<td><a method="post" href="template_single.php?id=' . $a->id . '"> ' . $a->id . ' </a></td>';
                 echo '<td>' .  $a->name . '</td>';
                 echo '<td>' .
-                    $a->createImage("300px", "300px")       
+                    $a->createImage("300px", "300px")
                     . '</td>';
                 echo '<td>' . $a->year . ' </td>';
-                echo '<td>' . $a->year . ' </td>';
+                echo '<td>' . $a->artist . ' </td>';
                 echo '<td>' . $a->medium . ' </td>';
                 echo '<td>' . $a->style . ' </td>';
                 echo '<td> <a class=\'btn btn-primary\' method="post" href="template_single.php?id=' . $a->id . '">Go To</a>';

@@ -1,7 +1,6 @@
 body {
     font-size: 62.5%;
     color: black;
-    text-decoration: inherit;
 }
 
 
@@ -10,9 +9,11 @@ li {
     color: inherit;
 }
 
+/*
 .outline {
     border: 1px solid black;
 }
+*/
 
 .mainContentAlignment {
     width: 50%;
@@ -29,10 +30,13 @@ li>.btn {
     size: 4rem;
 }
 
-.navStyle {
+header {
     background-image: url("https://www.shbarcelona.com/blog/en/wp-content/uploads/2017/09/art-gallery.jpg");
     background-position: center;
     background-size: auto;
-    font-weight: bold;
+}
+
+.navStyle {
     background-color: rgba(223, 187, 135, 0.75);
+    font-weight: bold;
 }
