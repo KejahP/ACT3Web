@@ -43,16 +43,15 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                <div class="col p-2">
+                    <form action="template_single.php?\" method="post">     <!-- `template_single - Copy.php` is a temporary file name -->
+                        <input type="search" name="search">
+                        <input type="submit">
+                    </form>
+                </div>
+                </li>
             </ul>
         </div>
-
-        <div class="col p-2">
-            <form class="d-flex searchSizing">
-                <input type="search" class="form-control" id="searchValue" placeholder="Search">
-                <button class="btn" type="submit">Search</button>
-            </form>
-        </div>
-
-
     </nav>
 </header>
