@@ -1,49 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+        Rhys Gillham
+        M133320
+        This is the template for the display of all or if given a style or artist only those matching the parameter.
+-->
 <?php
 $sqlImages = "SELECT * FROM paintings";
 $header = 'Browse';
 if (isset($_GET['style'])) {
     $painting_style = $_GET['style'];
     $sqlImages = "SELECT * FROM paintings WHERE style = '$painting_style'";
-    $header = 'Style';
+    $header = $painting_style;
 } elseif (isset($_GET['artist'])) {
     $painting_artist = $_GET['artist'];
     $sqlImages = "SELECT * FROM paintings WHERE artist = '$painting_artist'";
-    $header = 'Artist';
+    $header = $painting_artist;
 }
-?>
-<!DOCTYPE html>
-<html lang="en">
-
-<?php
-include_once(dirname(__DIR__).'/script/painting_model.php');
 include_once(dirname(__DIR__) . '/shared/head.php');
 ?>
 
 <body>
     <?php include_once(dirname(__DIR__) . '/shared/navbar.php'); ?>
-    <main class="mainContentAlignment outline">
+    <main class="mainContentAlignment">
         <?php
-        echo '<h1>'.$header.'</h1>';
+        echo '<h1>' . $header . '</h1>';
         ?>
-
-        <div class="container text-center">
-            <p>
-                Manager: Kejah Pulman (30034444)
-            </p>
-            <p>
-            <ul> Programmers:
-                <li>Rhys Gillham (M133320)</li>
-                <li>Andrew Masar (P271838) </li>
-            </ul>
-            </p>
-        </div>
-    </main>
-
-    <div class="container-fluid">
-        <table class="table mainContentAlignment">
+        <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Image</th>
                     <th scope="col">Year</th>
@@ -61,8 +46,6 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                 $a = painting::FromRow($row);
 
                 echo '<tr>';
-                #echo sprintf('<a method="post" href="template_single.php?id=%d">', $a->id);  
-                echo '<td><a method="post" href="template_single.php?id=' . $a->id . '"> ' . $a->id . ' </a></td>';
                 echo '<td>' .  $a->name . '</td>';
                 echo '<td>' .
                     $a->createImage("300px", "300px")
@@ -71,11 +54,15 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                 echo '<td>' . $a->artist . ' </td>';
                 echo '<td>' . $a->medium . ' </td>';
                 echo '<td>' . $a->style . ' </td>';
-                echo '<td> <a class=\'btn btn-primary\' method="post" href="template_single.php?id=' . $a->id . '">Go To</a>';
+                echo '<td> <a class=\'btn btn-primary\' method="post" href="painting_filtered.php?id=' . $a->id . '">Go To</a>';
                 echo '</a>';
                 echo '</tr>';
             }
             ?>
+        </table>
+    </main>
+
+
 </body>
 
 </html>

@@ -1,3 +1,8 @@
+<!--
+        Rhys Gillham
+        M133320
+        This is the sql commands that can be called depending on what is required, any additional commands should be placed here.
+-->
 <?php
 
 function returnQuery($target, $conn) //hand all/style/artist values back.
@@ -19,7 +24,7 @@ function returnQuery($target, $conn) //hand all/style/artist values back.
                 $item = $value['style'];
                 if (!in_array($item, $returnArr)) {
                     $returnArr[] = $item;
-                } 
+                }
             }
             return $returnArr;
 
@@ -38,7 +43,7 @@ function returnQuery($target, $conn) //hand all/style/artist values back.
                 $item = $value['artist'];
                 if (!in_array($item, $returnArr)) {
                     $returnArr[] = $item;
-                } 
+                }
             }
             return $returnArr;
 

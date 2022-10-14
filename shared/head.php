@@ -1,6 +1,3 @@
-<?php
-?>
-
 <head>
     <!--
         Rhys Gillham
