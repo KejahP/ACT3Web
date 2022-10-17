@@ -30,7 +30,7 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                     <ul class="dropdown-menu">
                         <?php
 
-                        $styles = returnQuery('style', $conn);
+                        $styles = sql_commands::returnQuery('style', $conn);
 
                         foreach ($styles as $value) {
                             echo '  <li class="dropdown-item">
@@ -48,7 +48,7 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                     <ul class="dropdown-menu">
                         <?php
 
-                        $artists = returnQuery('artist', $conn);
+                        $artists = sql_commands::returnQuery('artist', $conn);
 
                         foreach ($artists as $value) {
                             echo '  <li class="dropdown-item">

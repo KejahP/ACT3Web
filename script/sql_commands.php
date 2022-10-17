@@ -5,61 +5,73 @@
 -->
 <?php
 
-function returnQuery($target, $conn) //hand all/style/artist values back.
+class sql_commands
 {
+    public static function returnQuery($target, $conn) //hand all/style/artist values back.
+    {
 
-    switch ($target) {
-        case "style":
+        switch ($target)
+        {
+            case "style":
 
-            $sqlStyles = "SELECT style FROM paintings ORDER BY style";
+                $sqlStyles = "SELECT style FROM paintings ORDER BY style";
 
-            $sqlResults = $conn->prepare($sqlStyles);
-            $sqlResults->execute();
+                $sqlResults = $conn->prepare($sqlStyles);
+                $sqlResults->execute();
 
-            $returnArr = array();
-            $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
+                $returnArr = array();
+                $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
 
 
-            foreach ($data as $value) {
-                $item = $value['style'];
-                if (!in_array($item, $returnArr)) {
-                    $returnArr[] = $item;
+                foreach ($data as $value)
+                {
+                    $item = $value['style'];
+                    if (!in_array($item, $returnArr))
+                    {
+                        $returnArr[] = $item;
+                    }
                 }
-            }
-            return $returnArr;
+                return $returnArr;
 
-        case "artist":
+            case "artist":
 
-            $sqlStyles = "SELECT artist FROM paintings ORDER BY artist";
+                $sqlStyles = "SELECT artist FROM paintings ORDER BY artist";
 
-            $sqlResults = $conn->prepare($sqlStyles);
-            $sqlResults->execute();
+                $sqlResults = $conn->prepare($sqlStyles);
+                $sqlResults->execute();
 
-            $returnArr = array();
-            $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
+                $returnArr = array();
+                $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
 
 
-            foreach ($data as $value) {
-                $item = $value['artist'];
-                if (!in_array($item, $returnArr)) {
-                    $returnArr[] = $item;
+                foreach ($data as $value)
+                {
+                    $item = $value['artist'];
+                    if (!in_array($item, $returnArr))
+                    {
+                        $returnArr[] = $item;
+                    }
                 }
-            }
-            return $returnArr;
+                return $returnArr;
 
-        case "browse":
+            case "browse":
 
-            $sqlImages = "SELECT * FROM paintings";
+                $sqlImages = "SELECT * FROM paintings";
 
-            $stmtImages = $conn->prepare($sqlImages);
-            $stmtImages->execute();
+                $stmtImages = $conn->prepare($sqlImages);
+                $stmtImages->execute();
 
-            $returnArr = $stmtImages->fetch(PDO::FETCH_BOTH);
+                $returnArr = $stmtImages->fetch(PDO::FETCH_BOTH);
 
-            return $returnArr;
+                return $returnArr;
+        }
     }
-}
 
-function returnAll()
-{
+    public static function Delete($id, $conn)
+    {
+        $sqlStyles = "DELETE FROM paintings WHERE id='" . $id . "'";
+
+        $sqlResults = $conn->prepare($sqlStyles);
+        $sqlResults->execute();
+    }
 }

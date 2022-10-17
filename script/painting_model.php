@@ -44,7 +44,7 @@ class painting
   function FormGroup()
   { //  the dirname($_SERVER['PHP_SELF'], 2) seems to work well for navigating to the correct page, but the post method is still not getting those thicc values!
     echo "
-    <form class='row g-3' action='".dirname($_SERVER['PHP_SELF'], 2)."/script/testMethod.php' method='post' target='_self'>
+    <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>
       <table class='table'>
           <thead>
             <th scope=\"col\"></th>
@@ -64,9 +64,9 @@ class painting
           </tr>
 
           <tr>
-            <td>".
-                $this->createImage('300px', '300px').
-            "</td>
+            <td>" .
+      $this->createImage('300px', '300px') .
+      "</td>
           </tr>
 
           <tr>
@@ -102,7 +102,50 @@ class painting
         </table>
         <input class='btn' type='submit'>
     </form>";
-      
-    
   }
+
+  public static function CreateNew()
+  {
+    echo "
+    <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>
+      <table class='table'>
+          <thead>
+            <th scope=\"col\"></th>
+          </thead>
+          <tr>
+            <td>
+              <input class='form-control' type='text' placeholder='Name' id='pname' name='pname'>
+            </td>
+          </tr>
+
+          <tr>
+          IMAGE GOES HERE
+          </tr>
+
+          <tr>
+            <td>
+              <input class='form-control' type='number' id='pyear' name='pyear' min='0000' max='2100' placeholder='1500' >
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input class='form-control' type='text' placeholder='Artist' id='partist' name='partist'>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input class='form-control' type='text' placeholder='Medium' id='pmedium' name='pmedium'>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <input class='form-control' type='text' placeholder='Style' id='pstyle' name='pstyle'>
+            </td>
+          </tr>
+        </table>
+        <input class='btn' type='submit'>
+    </form>";
+  }
+
+
 }

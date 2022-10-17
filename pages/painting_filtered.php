@@ -9,14 +9,25 @@
 $pageNotLoaded = true;
 $title = "";
 $multiplePaintings = true;
+$task = 'noTask';
 
-if (isset($_GET['id'])) { //Determines if there is an id value and sets the query variable
+if (isset($_GET['id']))
+{ //Determines if there is an id value and sets the query variable
     $painting_id = $_GET['id'];
     $multiplePaintings = false;
+    $task = 'singleGet';
     $sqlImages = "SELECT * FROM paintings WHERE id = $painting_id";
-} else if (isset($_POST['search'])) { //Determines if there was a posted search value and sets the query variable
+}
+else if (isset($_POST['search']))
+{ //Determines if there was a posted search value and sets the query variable
     $sqlImages = "SELECT * FROM paintings WHERE name= '" . $_POST['search'] . "'";
+    $task = 'search';
     $title = "Results for " . $_POST['search'];
+}
+else if (isset($_GET['task']))
+{
+    $task = $_GET['task'];
+    $title = "Create New";
 }
 include_once(dirname(__DIR__) . '/shared/head.php');
 ?>
@@ -27,16 +38,40 @@ include_once(dirname(__DIR__) . '/shared/head.php');
         <?php
         echo '<h1>' . $title . '</h1>';
 
+        if ($task == 'create')
+        {
+            painting::CreateNew();
+        }
+        else if ($task == 'singleGet')
+        {
+
             $stmtImages = $conn->prepare($sqlImages);
             $stmtImages->execute();
 
-            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH)) {
-                if ($row != null) {
+            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH))
+            {
+                if ($row != null)
+                {
                     $pageNotLoaded = false;
                     $a = painting::FromRow($row);
-                    
-                    
-                    if ($multiplePaintings) 
+                    $a->FormGroup($conn);
+                }
+            }
+        }
+        else if ($task == 'search')
+        {
+            $stmtImages = $conn->prepare($sqlImages);
+            $stmtImages->execute();
+
+            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH))
+            {
+                if ($row != null)
+                {
+                    $pageNotLoaded = false;
+                    $a = painting::FromRow($row);
+
+
+                    if ($multiplePaintings)
                     { //Will place a clickable button that goes to that image directly if there could be multiple items on the page.
                         echo "
                         <table class='table'> 
@@ -62,18 +97,15 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                         echo '<td> <a class=\'btn btn-primary\' method="post" href="painting_filtered.php?id=' . $a->id . '">Go To</a>';
                         echo '</tr>';
                         echo "</table>";
-                    }     
-                    else
-                    {
-                        $a->FormGroup();
-                    }                  
+                    }
                 }
             }
-            
-            if ($pageNotLoaded) {
-                echo "<div class='row text-center'><h2>Painting not found</h2></div>";
-            }
-            ?>
+        }
+        else
+        {
+            echo "<div class='row text-center'><h2>Painting not found</h2></div>";
+        }
+        ?>
     </main>
 </body>
 

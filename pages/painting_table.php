@@ -8,24 +8,39 @@
 <?php
 $sqlImages = "SELECT * FROM paintings";
 $header = 'Browse';
-if (isset($_GET['style'])) {
+$task = 'displayAll';
+if (isset($_GET['style']))
+{
     $painting_style = $_GET['style'];
     $sqlImages = "SELECT * FROM paintings WHERE style = '$painting_style'";
     $header = $painting_style;
-} elseif (isset($_GET['artist'])) {
+}
+elseif (isset($_GET['artist']))
+{
     $painting_artist = $_GET['artist'];
     $sqlImages = "SELECT * FROM paintings WHERE artist = '$painting_artist'";
     $header = $painting_artist;
 }
+elseif (isset($_GET['task']))
+{
+    $task = 'delete';
+}
+
 include_once(dirname(__DIR__) . '/shared/head.php');
 ?>
 
 <body>
     <?php include_once(dirname(__DIR__) . '/shared/navbar.php'); ?>
     <main class="mainContentAlignment">
+
         <?php
         echo '<h1>' . $header . '</h1>';
         ?>
+        <div>
+            <a class="btn btn-primary" method="post" href="painting_filtered.php?task=create">
+                Add New
+            </a>
+        </div>
         <table class="table">
             <thead>
                 <tr>
@@ -38,11 +53,16 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                 </tr>
             </thead>
             <?php
+            if ($task == 'delete')
+            {
+                sql_commands::Delete($_GET['deleteId'], $conn);
+            }
 
             $stmtImages = $conn->prepare($sqlImages);
             $stmtImages->execute();
 
-            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH)) {
+            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH))
+            {
                 $a = painting::FromRow($row);
 
                 echo '<tr>';
@@ -55,7 +75,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                 echo '<td>' . $a->medium . ' </td>';
                 echo '<td>' . $a->style . ' </td>';
                 echo '<td> <a class=\'btn btn-primary\' method="post" href="painting_filtered.php?id=' . $a->id . '">Go To</a>';
-                echo '</a>';
+                echo '<td> <a class=\'btn btn-primary\' method="post" href="painting_table.php?task=delete&deleteId=' . $a->id . '">DELETE</a>';
                 echo '</tr>';
             }
             ?>
