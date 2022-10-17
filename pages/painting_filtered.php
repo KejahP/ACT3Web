@@ -25,20 +25,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
     <?php include_once(dirname(__DIR__) . '/shared/navbar.php'); ?>
     <main class="mainContentAlignment">
         <?php
-        echo '<h1>' . $title . '</h1>'
-        ?>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Year</th>
-                    <th scope="col">Artist</th>
-                    <th scope="col">Medium</th>
-                    <th scope="col">Style</th>
-                </tr>
-            </thead>
-            <?php
+        echo '<h1>' . $title . '</h1>';
 
             $stmtImages = $conn->prepare($sqlImages);
             $stmtImages->execute();
@@ -47,22 +34,42 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                 if ($row != null) {
                     $pageNotLoaded = false;
                     $a = painting::FromRow($row);
-                    echo '<tr>';
-                    echo '<td>' .  $a->name . '</td>';
-                    echo '<td>' .
-                        $a->createImage("300px", "300px")
-                        . '</td>';
-                    echo '<td>' . $a->year . ' </td>';
-                    echo '<td>' . $a->artist . ' </td>';
-                    echo '<td>' . $a->medium . ' </td>';
-                    echo '<td>' . $a->style . ' </td>';
-                    if ($multiplePaintings) { //Will place a clickable button that goes to that image directly if there could be multiple items on the page.
+                    
+                    
+                    if ($multiplePaintings) 
+                    { //Will place a clickable button that goes to that image directly if there could be multiple items on the page.
+                        echo "
+                        <table class='table'> 
+                        <thead>
+                        <tr>
+                            <th scope=\"col\">Name</th>
+                            <th scope=\"col\">Image</th>
+                            <th scope=\"col\">Year</th>
+                            <th scope=\"col\">Artist</th>
+                            <th scope=\"col\">Medium</th>
+                            <th scope=\"col\">Style</th>
+                        </tr>
+                        </thead>";
+                        echo '<tr>';
+                        echo '<td>' .  $a->name . '</td>';
+                        echo '<td>' .
+                            $a->createImage("300px", "300px")
+                            . '</td>';
+                        echo '<td>' . $a->year . ' </td>';
+                        echo '<td>' . $a->artist . ' </td>';
+                        echo '<td>' . $a->medium . ' </td>';
+                        echo '<td>' . $a->style . ' </td>';
                         echo '<td> <a class=\'btn btn-primary\' method="post" href="painting_filtered.php?id=' . $a->id . '">Go To</a>';
-                    }                    
-                    echo '</tr>';
+                        echo '</tr>';
+                        echo "</table>";
+                    }     
+                    else
+                    {
+                        $a->FormGroup();
+                    }                  
                 }
             }
-            echo "</table>";
+            
             if ($pageNotLoaded) {
                 echo "<div class='row text-center'><h2>Painting not found</h2></div>";
             }

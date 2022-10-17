@@ -40,4 +40,62 @@ class painting
   {
     return '<img src = "data:image/png;base64,' . base64_encode($this->image) . '" width = "' . $width . '" height = "' . $height . '"/>';
   }
+
+  function FormGroup()
+  {
+    echo "
+    <form class='row g-3' action='/ACT3Web/script/testMethod.php' method='post'>
+    <table class='table'>
+        <thead>
+          <th scope=\"col\"></th>
+          <th scope=\"col\"></th>
+          <th scope=\"col\"></th>
+        </thead>
+
+        <input type='text' class='visually-hidden' id='pid' value='$this->id'>
+        <tr>
+          <td>
+            <h6>$this->name</h6>
+          </td>
+          <td>
+            <input class='form-control' type='text' placeholder='Name' id='pname' value='$this->name'>
+          </td>
+        </tr>
+
+        <tr><td>".
+            $this->createImage('300px', '300px').
+        "</td></tr>
+
+        <tr>
+          <td> $this->year </td>
+          <td>
+            <input class='form-control' type='number' id='pyear' min='0000' max='2100' placeholder='1500' value='$this->year'>
+          </td>
+        </tr>
+        <tr>
+          <td> 
+            $this->artist 
+          </td>
+          <td>
+            <input class='form-control' type='text' placeholder='Artist' id='partist' value='$this->artist'>
+          </td>
+        </tr>
+        <tr>
+          <td> $this->medium </td>
+          <td>
+            <input class='form-control' type='text' placeholder='Medium' id='pmedium' value='$this->medium'>
+          </td>
+        </tr>
+        <tr>
+          <td> $this->style </td>
+          <td>
+            <input class='form-control' type='text' placeholder='Style' id='pstyle' value='$this->style'>
+          </td>
+        </tr>
+        </table>
+        <input class='btn' type='submit'>
+    </form>";
+      
+    
+  }
 }
