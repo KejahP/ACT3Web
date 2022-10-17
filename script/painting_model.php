@@ -45,55 +45,60 @@ class painting
   { //  the dirname($_SERVER['PHP_SELF'], 2) seems to work well for navigating to the correct page, but the post method is still not getting those thicc values!
     echo "
     <form class='row g-3' action='".dirname($_SERVER['PHP_SELF'], 2)."/script/testMethod.php' method='post' target='_self'>
-    <table class='table'>
-        <thead>
-          <th scope=\"col\"></th>
-          <th scope=\"col\"></th>
-          <th scope=\"col\"></th>
-        </thead>
+      <table class='table'>
+          <thead>
+            <th scope=\"col\"></th>
+            <th scope=\"col\"></th>
+            <th scope=\"col\"></th>
+          </thead>
 
-        <input type='hidden' id='pid' name='pid' value='$this->id'>
-        <input type='hidden' id='pimage' name='pimage' value='temp'>
-        <tr>
-          <td>
-            <h6>$this->name</h6>
-          </td>
-          <td>
-            <input class='form-control' type='text' placeholder='Name' id='pname' name='pname' value='$this->name'>
-          </td>
-        </tr>
+          <input type='hidden' id='pid' name='pid' value='$this->id'>
+          <input type='hidden' id='pimage' name='pimage' value='temp'>
+          <tr>
+            <td>
+              <h6>$this->name</h6>
+            </td>
+            <td>
+              <input class='form-control' type='text' placeholder='Name' id='pname' name='pname' value='$this->name'>
+            </td>
+          </tr>
 
-        <tr><td>".
-            $this->createImage('300px', '300px').
-        "</td>
-        </tr>
+          <tr>
+            <td>".
+                $this->createImage('300px', '300px').
+            "</td>
+          </tr>
 
-        <tr>
-          <td> $this->year </td>
-          <td>
-            <input class='form-control' type='number' id='pyear' name='pyear' min='0000' max='2100' placeholder='1500' value='$this->year'>
-          </td>
-        </tr>
-        <tr>
-          <td> 
-            $this->artist 
-          </td>
-          <td>
-            <input class='form-control' type='text' placeholder='Artist' id='partist' name='partist'value='$this->artist'>
-          </td>
-        </tr>
-        <tr>
-          <td> $this->medium </td>
-          <td>
-            <input class='form-control' type='text' placeholder='Medium' id='pmedium' name='pmedium' value='$this->medium'>
-          </td>
-        </tr>
-        <tr>
-          <td> $this->style </td>
-          <td>
-            <input class='form-control' type='text' placeholder='Style' id='pstyle' name='pstyle' value='$this->style'>
-          </td>
-        </tr>
+          <tr>
+            <td> 
+              $this->year 
+            </td>
+            <td>
+              <input class='form-control' type='number' id='pyear' name='pyear' min='0000' max='2100' placeholder='1500' value='$this->year'>
+            </td>
+          </tr>
+          <tr>
+            <td> 
+              $this->artist 
+            </td>
+            <td>
+              <input class='form-control' type='text' placeholder='Artist' id='partist' name='partist'value='$this->artist'>
+            </td>
+          </tr>
+          <tr>
+            <td> $this->medium </td>
+            <td>
+              <input class='form-control' type='text' placeholder='Medium' id='pmedium' name='pmedium' value='$this->medium'>
+            </td>
+          </tr>
+          <tr>
+            <td> 
+              $this->style 
+            </td>
+            <td>
+              <input class='form-control' type='text' placeholder='Style' id='pstyle' name='pstyle' value='$this->style'>
+            </td>
+          </tr>
         </table>
         <input class='btn' type='submit'>
     </form>";
