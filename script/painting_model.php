@@ -49,7 +49,7 @@ class painting
   {
     //echo " <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>"
     // <input type='image' id='pimage' name='pimage' value='".base64_encode($this->image)."' style='visibility: hidden;'>
-    echo "<form class='row g-3' action='../script/testMethod.php' method='post' target='_self'>
+    echo "<form class='row g-3' action='../script/testMethod.php' method='post' target='_self' enctype='multipart/form-data'>
       <table class='table'>
           <thead>
             <th scope=\"col\"></th>
@@ -73,11 +73,8 @@ class painting
               $this->createImage('300px', '300px') .
             "</td>
             <td>
-            <label for='avatar'>Upload New Image:</label>
-
-            <input type='file'
-                   id='pimage' name='pimage' value='".$this->createImage('300px', '300px')."'
-                   accept='image/png'>
+              <label for='pimage'>Upload New Image:</label>
+              <input type='file' id='pimage' name='pimage'>
             </td>
           </tr>
 

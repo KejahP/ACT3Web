@@ -16,7 +16,7 @@ echo
     <html lang=\"en\">
 
     <head>
-        <meta http-equiv=\"Refresh\" content=\"30; ../pages/painting_filtered.php?id=" . $_POST['pid'] . "\">
+        <meta http-equiv=\"Refresh\" content=\"5; ../pages/painting_filtered.php?id=" . $_POST['pid'] . "\">
     </head>
 
     <body>
@@ -24,17 +24,18 @@ echo
     </body>
 
     </html>";
-    //$eImage = fopen($_POST['pimage'], 'rb');
-    //$eImage = file_get_contents();
+
+if(isset($_FILES['pimage'])){
+    $image = file_get_contents($_FILES['pimage']['tmp_name']);
+}
 
 $sqlQuery = "UPDATE paintings 
     SET name='" . $_POST['pname'] .
-    "',imagefile='".file_get_contents($_POST['pimage']). $eImage. //"',imagefile='" . $eImage. //$_POST['pimage'] #"" .
-    "', year='" . $_POST['pyear'] . 
-    "', artist='" . $_POST['partist'] . 
-    "', medium='" . $_POST['pmedium'] . 
+    "',imagefile='" . $image .
+    "', year='" . $_POST['pyear'] .
+    "', artist='" . $_POST['partist'] .
+    "', medium='" . $_POST['pmedium'] .
     "', style='" . $_POST['pstyle'] .
-  "' WHERE id=" . $_POST['pid'] . "";
-echo $sqlQuery;
+    "' WHERE id=" . $_POST['pid'] . "";
 $stmt = $conn->prepare($sqlQuery);
 $stmt->execute();
