@@ -72,10 +72,6 @@ class painting
             <td>" .
               $this->createImage('300px', '300px') .
             "</td>
-            <td>
-              <label for='pimage'>Upload New Image:</label>
-              <input type='file' id='pimage' name='pimage'>
-            </td>
           </tr>
 
           <tr>
@@ -116,7 +112,7 @@ class painting
   public static function CreateNew()
   {
     echo "
-    <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>
+    <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/createMethod.php' method='post' target='_self' enctype='multipart/form-data'>
       <table class='table'>
           <thead>
             <th scope=\"col\"></th>
@@ -124,11 +120,15 @@ class painting
           <tr>
             <td>
               <input class='form-control' type='text' placeholder='Name' id='pname' name='pname'>
+              <input hidden class='form-control' type='text' id='create' name='create' value='create'>
             </td>
           </tr>
 
           <tr>
-          IMAGE GOES HERE
+          <td>
+              <label for='pimage'>Upload New Image:</label>
+              <input type='file' id='pimage' name='pimage'>
+            </td>
           </tr>
 
           <tr>
