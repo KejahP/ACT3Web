@@ -16,7 +16,7 @@ echo
     <html lang=\"en\">
 
     <head>
-        <meta http-equiv=\"Refresh\" content=\"5; ../pages/painting_filtered.php?id=" . $_POST['pid'] . "\">
+        <meta http-equiv=\"Refresh\" content=\"0; ../pages/painting_filtered.php?id=" . $_POST['pid'] . "\">
     </head>
 
     <body>
@@ -25,17 +25,15 @@ echo
 
     </html>";
 
-if(isset($_FILES['pimage'])){
-    $image = file_get_contents($_FILES['pimage']['tmp_name']);
-}
+$data = [
+    'name' => $_POST['pname'],
+    'year' => $_POST['pyear'],
+    'artist' => $_POST['partist'],
+    'medium' => $_POST['pmedium'],
+    'style' => $_POST['pstyle'],
+    'id' => $_POST['pid'],
+];
 
-$sqlQuery = "UPDATE paintings 
-    SET name='" . $_POST['pname'] .
-    "',imagefile='" . $image .
-    "', year='" . $_POST['pyear'] .
-    "', artist='" . $_POST['partist'] .
-    "', medium='" . $_POST['pmedium'] .
-    "', style='" . $_POST['pstyle'] .
-    "' WHERE id=" . $_POST['pid'] . "";
-$stmt = $conn->prepare($sqlQuery);
-$stmt->execute();
+$query = "UPDATE paintings SET name=:name, year=:year, artist=:artist, medium=:medium, style=:style WHERE id=:id";
+$stmt = $conn->prepare($query);
+$stmt->execute($data);
