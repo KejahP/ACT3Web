@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--
+        Andrew Masar
+        P271838
+
         Rhys Gillham
         M133320
+        
         This is the template for the display of a painting, it contains the page an error message if the item could not be located within the database.
 -->
 <?php

@@ -1,6 +1,10 @@
 <!--
+        Andrew Masar
+        P271838
+
         Rhys Gillham
         M133320
+
         This is the model for a painting, it ensures that all values are correct before allowing to be displayed.
 -->
 
@@ -42,9 +46,10 @@ class painting
   }
 
   function FormGroup()
-  { //  the dirname($_SERVER['PHP_SELF'], 2) seems to work well for navigating to the correct page, but the post method is still not getting those thicc values!
-    echo "
-    <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>
+  {
+    //echo " <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>"
+    // <input type='image' id='pimage' name='pimage' value='".base64_encode($this->image)."' style='visibility: hidden;'>
+    echo "<form class='row g-3' action='../script/testMethod.php' method='post' target='_self'>
       <table class='table'>
           <thead>
             <th scope=\"col\"></th>
@@ -53,7 +58,7 @@ class painting
           </thead>
 
           <input type='hidden' id='pid' name='pid' value='$this->id'>
-          <input type='hidden' id='pimage' name='pimage' value='temp'>
+          
           <tr>
             <td>
               <h6>$this->name</h6>
@@ -65,8 +70,15 @@ class painting
 
           <tr>
             <td>" .
-      $this->createImage('300px', '300px') .
-      "</td>
+              $this->createImage('300px', '300px') .
+            "</td>
+            <td>
+            <label for='avatar'>Upload New Image:</label>
+
+            <input type='file'
+                   id='pimage' name='pimage' value='".$this->createImage('300px', '300px')."'
+                   accept='image/png'>
+            </td>
           </tr>
 
           <tr>
