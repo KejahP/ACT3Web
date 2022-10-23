@@ -35,7 +35,7 @@ class painting
   // Overloaded Constructor OR static constructor, work around for limitation of only having one constructor per class
   public static function FromRow($row)
   {
-    $newPainting = new static($row['id'], $row['name'], $row['imagefile'], $row['year'], $row['artist'], $row['medium'], $row['style']);
+    $newPainting = new static($row['id'], $row['name'], $row['imageFile'], $row['year'], $row['artistName'], $row['medium'], $row['style']);
     return $newPainting;
   }
 

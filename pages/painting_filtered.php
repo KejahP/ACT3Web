@@ -21,10 +21,13 @@ if (isset($_GET['id']))
     $multiplePaintings = false;
     $task = 'singleGet';
     $sqlImages = "SELECT * FROM paintings WHERE id = $painting_id";
+    $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
+    FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.id = $painting_id ORDER BY paintings.name";
 }
 else if (isset($_POST['search']))
-{ //Determines if there was a posted search value and sets the query variable
-    $sqlImages = "SELECT * FROM paintings WHERE name= '" . $_POST['search'] . "'";
+{ 
+    $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
+    FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.name = '" . $_POST['search'] . "' ORDER BY paintings.name";
     $task = 'search';
     $title = "Results for " . $_POST['search'];
 }
