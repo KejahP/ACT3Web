@@ -65,6 +65,40 @@ class sql_commands
                 $returnArr = $stmtImages->fetch(PDO::FETCH_BOTH);
 
                 return $returnArr;
+
+            case "artStyle":
+
+                //selectst artists by style from the database and orders them alphabetically
+                $sqlStyles = "SELECT DISTINCT style FROM artists ORDER BY style";
+                $sqlResults = $conn->prepare($sqlStyles);
+                $sqlResults->execute();
+                    
+                $returnArr = array();
+                $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach($data as $value)
+                {
+                    $item = $value['style'];
+
+                    if($item != "UNKNOWN STYLE")
+                    {
+
+                        $returnArr[] = $item;
+                    }
+                }
+
+
+            // case "artMedium":
+            //     $sqlStyles = "SELECT DISTINCT medium FROM paintings JOIN artist ON paintings.artistID = artist.artistID ORDER BY artistName";
+            //     $sqlResults = $conn->prepare($sqlStyles);
+            //     $sqlResults->execute();
+
+            //     foreach($data as $value)
+            //     {
+            //         $item = $value['medium'];
+            //         $returnArr[] = $item;
+            //     }
+
         }
     }
 

@@ -3,12 +3,16 @@
 <!--
         Rhys Gillham
         M133320
+
+        Kejah Pulman 
+        30034444
+        
         This is the template for the display of all or if given a style or artist only those matching the parameter.
 -->
 <?php
 $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
 FROM paintings JOIN artists ON paintings.artistID = artists.artistID ORDER BY paintings.name";
-//echo "<script>console.log(\"".$sqlImages."\");</script>";
+echo "<script>console.log(\"".$sqlImages."\");</script>";
 $header = 'Browse';
 $task = 'displayAll';
 if (isset($_GET['style']))

@@ -25,42 +25,99 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                         Browse
                     </a>
                 </li>
-                <li class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Styles</button>
-                    <ul class="dropdown-menu">
-                        <?php
 
-                        $styles = sql_commands::returnQuery('style', $conn);
-
-                        foreach ($styles as $value) {
-                            echo '  <li class="dropdown-item">
-                                        <a class="btn" method="post" href="painting_table.php?style=' . $value . '">
-                                            <p>' . $value . '</p>
-                                        </a>
-                                    </li>';
-                        }
-                        ?>
-                    </ul>
-                </li>
 
                 <li class="dropdown">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown">Artists</button>
+                    <button class="btn dropdown-toggle" type="" data-bs-toggle="dropdown">Paintings </button>
                     <ul class="dropdown-menu">
-                        <?php
+                        
+                        <li class="dropdown">
+                        <caption class="btn dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aaria-expanded="false">Styles </button>
 
-                        $artists = sql_commands::returnQuery('artist', $conn);
+                        <ul class="dropdown-content">
+                            <?php
+                            $styles = sql_commands::returnQuery('style', $conn);
 
-                        foreach ($artists as $value) {
-                            echo '  <li class="dropdown-item">
-                                        <a class="btn" method="post" href="painting_table.php?artist=' . $value . '">
-                                            <p>' . $value . '</p>
-                                        </a>
+                                foreach ($styles as $value) 
+                                {
+                                    echo '  <li class="dropdown-item">
+                                    <a class="btn" method="post" href="painting_table.php?style=' . $value . '">
+                                    <p>' . $value . '</p>
+                                    </a>
                                     </li>';
-                        }
-                        ?>
+                                }
+                            ?>
+                        </ul>
+
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <caption class="btn dropdown-toggle-split" type="" data-bs-toggle="dropdown" aria-expanded="false">Artists</button>
+
+                        <ul class="dropdown-content">
+                            <?php
+
+                                $artists = sql_commands::returnQuery('artist', $conn);
+
+                                foreach ($artists as $value) 
+                                {
+                                    echo '  <li class="dropdown-item">
+                                    <a class="btn" method="post" href="painting_table.php?artist=' . $value . '">
+                                    <p>' . $value . '</p>
+                                    </a>
+                                    </li>';
+                                }
+                            ?>
+                        </ul>
                     </ul>
                 </li>
             </ul>
+
+
+
+            <li class="dropdown">
+                    <button class="btn dropdown-toggle" type="" data-bs-toggle="dropdown">Artists</button>
+                    <ul class="dropdown-menu">
+                        
+                        <li class="dropdown">
+                        <caption class="btn dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aaria-expanded="false">Styles</button>
+
+                        <ul class="dropdown-content">
+                            <?php
+                            $artStyles = sql_commands::returnQuery('artStyle', $conn);
+
+                                foreach ($artStyles as $value) 
+                                {
+                                    echo '  <li class="dropdown-item">
+                                    <a class="btn" method="post" href="ArtistTable.php?medium=' . $value . '">
+                                    <p>' . $value . '</p>
+                                    </a>
+                                    </li>';
+                                }
+                            ?>
+                        </ul>
+
+
+                        <li><hr class="dropdown-divider"></li>
+
+                        <caption class="btn dropdown-toggle-split" type="" data-bs-toggle="dropdown" aria-expanded="false">Mediums</button>
+                        <ul class="dropdown-content">
+                            <?php
+
+                                // $artMed = sql_commands::returnQuery('artMedium', $conn);
+
+                                // foreach ($artists as $value) 
+                                // {
+                                //     echo '  <li class="dropdown-item">
+                                //     <a class="btn" method="post" href="ArtistTable.php?style=' . $value . '">
+                                //     <p>' . $value . '</p>
+                                //     </a>
+                                //     </li>';
+                                // }
+                            ?>
+                        </ul>
+                    </ul>
+                </li>
 
         </div>
 
