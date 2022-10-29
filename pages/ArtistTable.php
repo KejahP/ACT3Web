@@ -8,7 +8,6 @@
 -->
 <?php
 include_once(dirname(__DIR__) . '/shared/navbar.php'); 
-include_once(dirname(__DIR__) . '/script/ArtistModel.php');
 include_once(dirname(__DIR__) . '/script/connection.php');
 ?>
 
@@ -16,7 +15,7 @@ include_once(dirname(__DIR__) . '/script/connection.php');
     	<?php
             include_once(dirname(__DIR__) . '/shared/head.php');
 
-            $sqlImages = "SELECT artistName, imageFile, style, 'life Span' FROM artists"; 
+            $sqlImages = "SELECT artistName, imageFile, style, lifeSpan FROM artists"; 
 
             echo "<script>console.log(\"".$sqlImages."\");</script>";
             
@@ -40,7 +39,7 @@ include_once(dirname(__DIR__) . '/script/connection.php');
                     <th scope="col">Artist</th>
                     <th scope="col">Self Portrait</th>
                     <th scope="col">Style</th>
-                    <th scope="col">'Life Span'</th>
+                    <th scope="col">Life Span</th>
                 </tr>
             </thead>
 
@@ -50,19 +49,15 @@ include_once(dirname(__DIR__) . '/script/connection.php');
             
                 $stmtImages = $conn->prepare($sqlImages);
                 $stmtImages->execute();
-            
-                while ($row = $stmtImages->setFetchMode(PDO::FETCH_BOTH))
+
+                while ($row = $stmtImages->fetch())
                 {
-                    $a = artist::FromRow($row);
-                    echo '<tr>';
-                    echo '<td>' .  $a->artistName . '</td>';
-                    echo '<td>' .$a->imageFile. '</td>';
-                    echo '<td>' . $a->style . ' </td>';
-                    echo '<td>' . $a->lifeSpan . ' </td>';
-                
-                    echo '<td> <a class=\'btn btn-primary\' method="post" href="ArtistFiltered.php?id=' . $a->artistID . '">Go To</a>';
-                    echo '<td> <a class=\'btn btn-primary\' method="post" href="ArtistTable.php?task=delete&deleteId=' . $a->artistID . '">Delete</a>';
-                    echo '</tr>';
-            }
+                    echo "<tr>";
+                    echo "<td scope = \"row\">" . $row['artistName'] . "</td>";
+                    echo "<td scope = \"row\">" . '<img src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 300px" . "height = 300px"/>'. "</td>";
+                    echo "<td scope = \"row\">" . $row['style'] . "</td>";
+                    echo "<td scope = \"row\">" . $row['lifeSpan'] . "</td>";
+                    echo "</tr>";
+                }
             ?>
 </table>

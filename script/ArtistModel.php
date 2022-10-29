@@ -24,22 +24,6 @@ class artist
       $this->lifeSpan = $lifeSpan;
     }
 
-    //creates an artist row 
-    public static function FromRow ($row)
-    {
-        $artist = new static
-        (
-            //broken and I cannot find the fix
-            $row['artistID'], 
-            $row['artistName'], 
-            $row['imageFile'],
-            $row['style'],
-            $row['life Span']
-        );
-
-        return $artist;
-    }
-
 }
 
 ?>
