@@ -25,16 +25,19 @@ class artist
     }
 
     //creates an artist row 
-    public static function NewRow ($row)
+    public static function FromRow ($row)
     {
-        $newArtist = new static(
+        $artist = new static
+        (
+            //broken and I cannot find the fix
             $row['artistID'], 
             $row['artistName'], 
             $row['imageFile'],
             $row['style'],
-            $row['life Span']);
+            $row['life Span']
+        );
 
-            return $newArtist;
+        return $artist;
     }
 
 }

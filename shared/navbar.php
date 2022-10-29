@@ -84,12 +84,13 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
 
                         <ul class="dropdown-content">
                             <?php
+                            //broken in commands
                             $artStyles = sql_commands::returnQuery('artStyle', $conn);
 
                                 foreach ($artStyles as $value) 
                                 {
                                     echo '  <li class="dropdown-item">
-                                    <a class="btn" method="post" href="ArtistTable.php?medium=' . $value . '">
+                                    <a class="btn" method="post" href="ArtistTable.php?ArtStyles=' . $value . '">
                                     <p>' . $value . '</p>
                                     </a>
                                     </li>';

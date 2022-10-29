@@ -83,7 +83,7 @@ class sql_commands
                     if($item != "UNKNOWN STYLE")
                     {
 
-                        $returnArr[] = $item;
+                        $returnArr[]= $item;
                     }
                 }
 

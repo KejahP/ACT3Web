@@ -8,6 +8,8 @@
 -->
 <?php
 include_once(dirname(__DIR__) . '/shared/navbar.php'); 
+include_once(dirname(__DIR__) . '/script/ArtistModel.php');
+include_once(dirname(__DIR__) . '/script/connection.php');
 ?>
 
 <body>
@@ -51,16 +53,15 @@ include_once(dirname(__DIR__) . '/shared/navbar.php');
             
                 while ($row = $stmtImages->setFetchMode(PDO::FETCH_BOTH))
                 {
-                    $a = artist::NewRow($row);
-
+                    $a = artist::FromRow($row);
                     echo '<tr>';
                     echo '<td>' .  $a->artistName . '</td>';
                     echo '<td>' .$a->imageFile. '</td>';
                     echo '<td>' . $a->style . ' </td>';
                     echo '<td>' . $a->lifeSpan . ' </td>';
                 
-                    echo '<td> <a class=\'btn btn-primary\' method="post" href="ArtistFiltered.php?id=' . $a->id . '">Go To</a>';
-                    echo '<td> <a class=\'btn btn-primary\' method="post" href="ArtistTable.php?task=delete&deleteId=' . $a->id . '">Delete</a>';
+                    echo '<td> <a class=\'btn btn-primary\' method="post" href="ArtistFiltered.php?id=' . $a->artistID . '">Go To</a>';
+                    echo '<td> <a class=\'btn btn-primary\' method="post" href="ArtistTable.php?task=delete&deleteId=' . $a->artistID . '">Delete</a>';
                     echo '</tr>';
             }
             ?>
