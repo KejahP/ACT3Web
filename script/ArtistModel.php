@@ -24,6 +24,20 @@ class artist
       $this->lifeSpan = $lifeSpan;
     }
 
+    public static function ArtRow($row)
+    {
+      $newArtist = new static
+      (
+        $row['artistID'],
+        $row['artistName'],
+        $row['imageFile'],
+        $row['style'],
+        $row['lifeSpan']
+      );
+      
+      return $newArtist;
+    }
+
 }
 
 ?>

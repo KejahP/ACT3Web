@@ -9,27 +9,34 @@
         
         This is the template for the display of all or if given a style or artist only those matching the parameter.
 -->
-<?php
-$sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
-FROM paintings JOIN artists ON paintings.artistID = artists.artistID ORDER BY paintings.name";
-echo "<script>console.log(\"".$sqlImages."\");</script>";
-$header = 'Browse';
-$task = 'displayAll';
-if (isset($_GET['style']))
-{
-    $painting_style = $_GET['style'];
-    $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
-    FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.style = '$painting_style' ORDER BY paintings.name";
-    $header = $painting_style;
-}
-elseif (isset($_GET['artist']))
-{
-    $painting_artist = $_GET['artist'];
-    $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
-    FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE artists.artistName = '$painting_artist' ORDER BY paintings.name";
 
-    $header = $painting_artist;
-}
+<?php
+    $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
+    FROM paintings JOIN artists ON paintings.artistID = artists.artistID ORDER BY paintings.name";
+    echo "<script>console.log(\"".$sqlImages."\");</script>";
+
+    $header = 'Browse';
+    $task = 'displayAll';
+    
+    if (isset($_GET['style']))
+    {
+        $painting_style = $_GET['style'];
+        
+        //eat an actual dick
+        $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
+        FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.style = '$painting_style' ORDER BY paintings.name";
+        
+        $header = $painting_style;
+    }
+    elseif (isset($_GET['artist']))
+    {
+        $painting_artist = $_GET['artist'];
+        
+        $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
+        FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE artists.artistName = '$painting_artist' ORDER BY paintings.name";
+
+        $header = $painting_artist;
+    }
 elseif (isset($_GET['task']))
 {
     $task = 'delete';
@@ -41,7 +48,6 @@ include_once(dirname(__DIR__) . '/shared/head.php');
 <body>
     <?php include_once(dirname(__DIR__) . '/shared/navbar.php'); ?>
     <main class="mainContentAlignment">
-
         <?php
         echo '<h1>' . $header . '</h1>';
         ?>

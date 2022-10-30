@@ -20,19 +20,23 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                         Home
                     </a>
                 </li>
-                <li>
-                    <a class="btn" href=" painting_table.php">
-                        Browse
-                    </a>
+                <li class="dropdown">
+                    <button class="btn dropdown-toggle" type="" data-bs-toggle="dropdown">Browse</button>
+                    <ul class="dropdown-menu">
+                        <ul class="dropdown-content">
+                            <a class="dropdown-item" href="painting_table.php">Browse Paintings</a></li>
+                            <a class="dropdown-item" href="ArtistTable.php">Browse Artists</a></li>
+                        </ul>
+                    </ul>
                 </li>
 
 
                 <li class="dropdown">
-                    <button class="btn dropdown-toggle" type="" data-bs-toggle="dropdown">Paintings </button>
+                    <button class="btn dropdown-toggle" data-bs-toggle="dropdown">Paintings </button>
                     <ul class="dropdown-menu">
                         
                         <li class="dropdown">
-                        <caption class="btn dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aaria-expanded="false">Styles </button>
+                        <caption class="btn dropdown-toggle-split" type="button" data-bs-toggle="dropdown" aaria-expanded="false">Styles</button>
 
                         <ul class="dropdown-content">
                             <?php
@@ -71,11 +75,10 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                         </ul>
                     </ul>
                 </li>
-            </ul>
+            
 
 
-
-            <li class="dropdown">
+                <li class="dropdown">
                     <button class="btn dropdown-toggle" type="" data-bs-toggle="dropdown">Artists</button>
                     <ul class="dropdown-menu">
                         
@@ -90,7 +93,7 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                                 foreach ($artStyles as $value) 
                                 {
                                     echo '  <li class="dropdown-item">
-                                    <a class="btn" method="post" href="ArtistTable.php?ArtStyles=' . $value . '">
+                                    <a class="btn" method="post" href="ArtistTable.php?artStyles=' . $value . '">
                                     <p>' . $value . '</p>
                                     </a>
                                     </li>';
@@ -105,22 +108,23 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                         <ul class="dropdown-content">
                             <?php
 
-                                // $artMed = sql_commands::returnQuery('artMedium', $conn);
+                                $artMed = sql_commands::returnQuery('artMedium', $conn);
 
-                                // foreach ($artists as $value) 
-                                // {
-                                //     echo '  <li class="dropdown-item">
-                                //     <a class="btn" method="post" href="ArtistTable.php?style=' . $value . '">
-                                //     <p>' . $value . '</p>
-                                //     </a>
-                                //     </li>';
-                                // }
+                                foreach ($artists as $value) 
+                                {
+                                    echo '  <li class="dropdown-item">
+                                    <a class="btn" method="post" href="ArtistTable.php?artMedium=' . $value . '">
+                                    <p>' . $value . '</p>
+                                    </a>
+                                    </li>';
+                                }
                             ?>
                         </ul>
                     </ul>
                 </li>
 
-        </div>
+            </div>
+        </ul>
 
         <div class="col p-2">
             <form class="d-flex searchSizing" action="painting_filtered.php" method="post">

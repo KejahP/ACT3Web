@@ -68,7 +68,7 @@ class sql_commands
 
             case "artStyle":
 
-                //selectst artists by style from the database and orders them alphabetically
+                //selects artists by style from the database and orders them alphabetically
                 $sqlStyles = "SELECT DISTINCT style FROM artists ORDER BY style";
                 $sqlResults = $conn->prepare($sqlStyles);
                 $sqlResults->execute();
@@ -80,25 +80,30 @@ class sql_commands
                 {
                     $item = $value['style'];
 
-                    if($item != "UNKNOWN STYLE")
+                    if($item != "UNKNOWN")
                     {
 
                         $returnArr[]= $item;
                     }
                 }
+                return $returnArr;
 
 
-            // case "artMedium":
-            //     $sqlStyles = "SELECT DISTINCT medium FROM paintings JOIN artist ON paintings.artistID = artist.artistID ORDER BY artistName";
-            //     $sqlResults = $conn->prepare($sqlStyles);
-            //     $sqlResults->execute();
+            //change to art medium once I figure out how to implement it
+            case "artMedium":
+                $sqlStyles = "SELECT lifeSpan FROM artists ORDER BY lifeSpan";
+                $sqlResults = $conn->prepare($sqlStyles);
+                $sqlResults->execute();
 
-            //     foreach($data as $value)
-            //     {
-            //         $item = $value['medium'];
-            //         $returnArr[] = $item;
-            //     }
+                $returnArr = array();
+                $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
 
+                foreach($data as $value)
+                {
+                    $item = $value['lifeSpan'];
+                    $returnArr[] = $item;
+                }
+                return $returnArr;
         }
     }
 
