@@ -26,9 +26,12 @@ if (isset($_GET['id']))
     FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.id = $painting_id ORDER BY paintings.name";
 }
 else if (isset($_POST['search']))
-{ 
+{
+    $search = $_POST['search'];
+    $task = "search";
+    echo '<script>console.log("' . $search . '");</script>';
     $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
-    FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.name = '" . $_POST['search'] . "' ORDER BY paintings.name";
+    FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.name LIKE '%" . $search . "%' ORDER BY paintings.name";
     $task = 'search';
     $title = "Results for " . $_POST['search'];
 }
@@ -71,17 +74,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
             $stmtImages = $conn->prepare($sqlImages);
             $stmtImages->execute();
 
-            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH))
-            {
-                if ($row != null)
-                {
-                    $pageNotLoaded = false;
-                    $a = painting::FromRow($row);
-
-
-                    if ($multiplePaintings)
-                    { //Will place a clickable button that goes to that image directly if there could be multiple items on the page.
-                        echo "
+            echo "
                         <table class='table'> 
                         <thead>
                         <tr>
@@ -93,6 +86,13 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                             <th scope=\"col\">Style</th>
                         </tr>
                         </thead>";
+            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH))
+            {
+                if ($row != null)
+                {
+                    $pageNotLoaded = false;
+                    $a = painting::FromRow($row);
+
                         echo '<tr>';
                         echo '<td>' .  $a->name . '</td>';
                         echo '<td>' .
@@ -104,10 +104,9 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                         echo '<td>' . $a->style . ' </td>';
                         echo '<td> <a class=\'btn btn-primary\' method="post" href="painting_filtered.php?id=' . $a->id . '">Go To</a>';
                         echo '</tr>';
-                        echo "</table>";
-                    }
                 }
             }
+            echo "</table>";
         }
         else
         {

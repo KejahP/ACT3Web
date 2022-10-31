@@ -72,24 +72,24 @@ class sql_commands
                 $sqlStyles = "SELECT DISTINCT style FROM artists ORDER BY style";
                 $sqlResults = $conn->prepare($sqlStyles);
                 $sqlResults->execute();
-                    
+
                 $returnArr = array();
                 $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
 
-                foreach($data as $value)
+                foreach ($data as $value)
                 {
                     $item = $value['style'];
 
-                    if($item != "UNKNOWN STYLE")
+                    if ($item != "UNKNOWN STYLE")
                     {
 
-                        $returnArr[]= $item;
+                        $returnArr[] = $item;
                     }
                 }
                 return $returnArr;
 
 
-            //change to art medium once I figure out how to implement it
+                //change to art medium once I figure out how to implement it
             case "artLife":
                 $sqlStyles = "SELECT DISTINCT lifeSpan FROM artists ORDER BY lifeSpan";
                 $sqlResults = $conn->prepare($sqlStyles);
@@ -98,11 +98,11 @@ class sql_commands
                 $returnArr = array();
                 $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
 
-                foreach($data as $value)
+                foreach ($data as $value)
                 {
                     $item = $value['lifeSpan'];
 
-                    if($item != 'UNKNOWN LIFESPAN')
+                    if ($item != 'UNKNOWN LIFESPAN')
                     {
                         $returnArr[] = $item;
                     }
@@ -117,4 +117,5 @@ class sql_commands
         $sqlResults = $conn->prepare($sqlQuery);
         $sqlResults->execute();
     }
+
 }
