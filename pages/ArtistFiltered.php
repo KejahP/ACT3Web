@@ -17,22 +17,36 @@
         {
                 $ID = $_GET['id'];
                 $multi = false;
-                $sqlImages = "SELECT * FROM artists WHERE id = $ID";
-                $sqlImages = "SELECT artistID, artistName, imageFile, style, lifeSpan FROM artists WHERE 'artistID' = '$ID'";
+                $sqlImages = "SELECT artistID, artistName, imageFile, style, lifeSpan FROM artists WHERE artistID = '$ID'";
 
                 $stmtImages = $conn->prepare($sqlImages);
                 $stmtImages->execute();
                  
-                echo "<script>console.log(\"".$sqlImages."\");</script>"; 
-
+                echo '<main class="mainContentAlignment">';
+                echo "
+                <table class='table'> 
+                <thead>
+                <tr>
+                    <th scope=\"col\">Name</th>
+                    <th scope=\"col\">Image</th>
+                    <th scope=\"col\">Style</th>
+                    <th scope=\"col\">Life Span</th>
+                </tr>
+                </thead>";
                 while ($row = $stmtImages->fetch())
                 {
-                        echo "<script>console.log(\"".$row."\");</script>"; 
-                        echo "<tr scope = \"row\">" . $row['artistName'] . "</tr>";
-                        echo "<tr scope = \"row\">" . '<img src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 600px" . "height = 600px"/>'. "</tr>";
-                        echo "<tr scope = \"row\">" . $row['style'] . "</tr>";
-                        echo "<tr scope = \"row\">" . $row['lifeSpan'] . "</tr>";
-                }
+                        echo '<tr>';
+                        echo "<td scope = \"row\">" . $row['artistName'];
+                        //echo " <input class='form-control' type='text' placeholder='Name' id='pname' name='pname' value='$row['artistName']'>";
+                        echo "</td>";
 
+                        echo "<td scope = \"row\">" . '<img src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 450px" . "height = 450px"/>'. "</td>";
+                        echo "<td scope = \"row\">" . $row['style'] . "</td>";
+                        echo "<td scope = \"row\">" . $row['lifeSpan'] . "</td>";
+                        echo '</tr>';
+                }
+                echo "</table>";
+
+                echo '</main>';
         }
 ?>

@@ -22,7 +22,6 @@
     {
         $painting_style = $_GET['style'];
         
-        //eat an actual dick
         $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
         FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.style = '$painting_style' ORDER BY paintings.name";
         

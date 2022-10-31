@@ -80,7 +80,7 @@ class sql_commands
                 {
                     $item = $value['style'];
 
-                    if($item != "UNKNOWN")
+                    if($item != "UNKNOWN STYLE")
                     {
 
                         $returnArr[]= $item;
@@ -90,8 +90,8 @@ class sql_commands
 
 
             //change to art medium once I figure out how to implement it
-            case "artMedium":
-                $sqlStyles = "SELECT lifeSpan FROM artists ORDER BY lifeSpan";
+            case "artLife":
+                $sqlStyles = "SELECT DISTINCT lifeSpan FROM artists ORDER BY lifeSpan";
                 $sqlResults = $conn->prepare($sqlStyles);
                 $sqlResults->execute();
 
@@ -101,7 +101,11 @@ class sql_commands
                 foreach($data as $value)
                 {
                     $item = $value['lifeSpan'];
-                    $returnArr[] = $item;
+
+                    if($item != 'UNKNOWN LIFESPAN')
+                    {
+                        $returnArr[] = $item;
+                    }
                 }
                 return $returnArr;
         }

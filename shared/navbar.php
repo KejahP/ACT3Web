@@ -104,16 +104,15 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
 
                         <li><hr class="dropdown-divider"></li>
 
-                        <caption class="btn dropdown-toggle-split" type="" data-bs-toggle="dropdown" aria-expanded="false">Mediums</button>
+                        <caption class="btn dropdown-toggle-split" type="" data-bs-toggle="dropdown" aria-expanded="false">Life Span</button>
                         <ul class="dropdown-content">
                             <?php
 
-                                $artMed = sql_commands::returnQuery('artMedium', $conn);
-
-                                foreach ($artists as $value) 
+                                $artMed = sql_commands::returnQuery('artLife', $conn);
+                                foreach ($artMed as $value) 
                                 {
                                     echo '  <li class="dropdown-item">
-                                    <a class="btn" method="post" href="ArtistTable.php?artMedium=' . $value . '">
+                                    <a class="btn" method="post" href="ArtistTable.php?artLife=' . $value . '">
                                     <p>' . $value . '</p>
                                     </a>
                                     </li>';

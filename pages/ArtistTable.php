@@ -11,21 +11,21 @@
     include_once(dirname(__DIR__) . '/script/connection.php');
     include_once(dirname(__DIR__) . '/pages/ArtistFiltered.php');
 
-    if (isset($_GET['artStyle']))
+    if (isset($_GET['artStyles']))
     {
-        $artStyle = $_GET['artStyle'];
-        $sqlImages = "SELECT artistID, artistName, imageFile, style, lifeSpan, FROM artists WHERE style = '$artStyle'";
+        $artStyle = $_GET['artStyles'];
+        $sqlImages = "SELECT artistID, artistName, imageFile, style, lifeSpan FROM artists WHERE style = '$artStyle'";
 
         $header = $artStyle;
         $stmtImages = $conn->prepare($sqlImages);
         $stmtImages->execute();
     }
-    else if (isset($_GET['artMedium']))
+    else if (isset($_GET['artLife']))
     {
-        $artStyle = $_GET['artMedium'];
-        $sqlImages = "SELECT artistID, artistName, imageFile, style, lifeSpan FROM artists WHERE 'lifeSpan' = '$artStyle'";
+        $artLife = $_GET['artLife'];
+        $sqlImages = "SELECT artistID, artistName, imageFile, style, lifeSpan FROM artists WHERE lifeSpan = '$artLife'";
         
-        $header = $artStyle;
+        $header = $artLife;
         $stmtImages = $conn->prepare($sqlImages);
         $stmtImages->execute();
     }
@@ -37,11 +37,11 @@
         $stmtImages->execute();
     }
 
-
     include_once(dirname(__DIR__) . '/shared/head.php');
 ?>
 
-<body>       
+<body>
+<main class="mainContentAlignment">       
     <?php
         echo '<h1>' . $header . '</h1>';
     ?>
@@ -51,8 +51,7 @@
                 Add Artist
             </a>
         </div>
-
-<main class="mainContentAlignment">
+        
     <table class="table">
             <thead>
             

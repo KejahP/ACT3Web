@@ -38,6 +38,12 @@ class artist
       return $newArtist;
     }
 
+    //for create new follow the script/create method.php
+    public function createNew()
+    {
+        
+    }
+
 }
 
 ?>
