@@ -48,6 +48,17 @@ class painting
   function FormGroup($conn)
   {
     $artists = sql_commands::returnQuery("artistName", $conn);
+?>
+    <script>
+      <?php
+      foreach ($artists as $data)
+      {
+
+        echo "console . log('" . $data[0] . " : " . $data[1] . "');";
+      }
+      ?>
+    </script>
+<?php
 
     //echo " <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>"
     // <input type='image' id='pimage' name='pimage' value='".base64_encode($this->image)."' style='visibility: hidden;'>
@@ -72,8 +83,8 @@ class painting
 
           <tr>
             <td>" .
-              $this->createImage('300px', '300px') .
-            "</td>
+      $this->createImage('300px', '300px') .
+      "</td>
           </tr>
 
           <tr>
@@ -89,7 +100,17 @@ class painting
               $this->artist 
             </td>
             <td>
-              <input class='form-control' type='text' placeholder='Artist' id='partist' name='partist'value='$this->artist'>
+            <div>
+                <input list='artistID' id='partist' name='partist' placeholder='Artist Name' required>
+                <datalist id='artistID'>
+                ";
+    foreach ($artists as $data)
+    {
+      echo "<option value='" . $data[0] . "'>" . $data[1] . "</option>";
+    }
+    echo "
+                  </datalist>
+            </div>
             </td>
           </tr>
           <tr>
@@ -111,10 +132,12 @@ class painting
     </form>";
   }
 
-  public static function CreateNew()
+  public static function CreateNew($conn)
   {
+    $artists = sql_commands::returnQuery("artistName", $conn);
     echo "
-    <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/createMethod.php' method='post' target='_self' enctype='multipart/form-data'>
+    <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) .
+      "/script/createMethod.php' method='post' target='_self' enctype='multipart/form-data'>
       <table class='table'>
           <thead>
             <th scope=\"col\"></th>
@@ -140,7 +163,17 @@ class painting
           </tr>
           <tr>
             <td>
-              <input class='form-control' type='text' placeholder='Artist' id='partist' name='partist'>
+              <div>
+                <input list='artistID' id='partist' name='partist' placeholder='Artist Name' required>
+                <datalist id='artistID'>
+                ";
+    foreach ($artists as $data)
+    {
+      echo "<option value='" . $data[0] . "'>" . $data[1] . "</option>";
+    }
+    echo "
+                  </datalist>
+            </div>
             </td>
           </tr>
           <tr>
@@ -157,6 +190,4 @@ class painting
         <input class='btn' type='submit'>
     </form>";
   }
-
-
 }

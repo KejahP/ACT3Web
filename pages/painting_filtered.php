@@ -52,7 +52,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
         //Creates a new painting into the database.
         if ($task == 'create')
         {
-            painting::CreateNew();
+            painting::CreateNew($conn);
         }
         else if ($task == 'singleGet') //When the 'go to' button is pressed it will populate an update page.
         {

@@ -119,12 +119,10 @@ class sql_commands
 
                 foreach ($data as $value)
                 {
-                    $item = $value['artistName'];
+                    $item[0] = $value['artistID'];
+                    $item[1] = $value['artistName'];
 
-                    if ($item != 'UNKNOWN ARTIST')
-                    {
                         $returnArr[] = $item;
-                    }
                 }
                 return $returnArr;
         }
