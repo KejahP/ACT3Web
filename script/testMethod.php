@@ -34,6 +34,6 @@ $data = [
     'id' => $_POST['pid'],
 ];
 
-$query = "UPDATE paintings SET name=:name, year=:year, artist=:artist, medium=:medium, style=:style WHERE id=:id";
+$query = "UPDATE paintings SET name=:name, year=:year, artistID=:artist, medium=:medium, style=:style WHERE id=:id";
 $stmt = $conn->prepare($query);
 $stmt->execute($data);

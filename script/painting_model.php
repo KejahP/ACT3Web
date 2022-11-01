@@ -45,8 +45,10 @@ class painting
     return '<img src = "data:image/png;base64,' . base64_encode($this->image) . '" width = "' . $width . '" height = "' . $height . '"/>';
   }
 
-  function FormGroup()
+  function FormGroup($conn)
   {
+    $artists = sql_commands::returnQuery("artistName", $conn);
+
     //echo " <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>"
     // <input type='image' id='pimage' name='pimage' value='".base64_encode($this->image)."' style='visibility: hidden;'>
     echo "<form class='row g-3' action='../script/testMethod.php' method='post' target='_self' enctype='multipart/form-data'>

@@ -34,6 +34,6 @@ $data = [
     'style' => $_POST['pstyle'],
 ];
 
-$query = "INSERT INTO paintings(name, imageFile, year, artist, medium, style) VALUES(:name, :imageFile, :year, :artist, :medium, :style)";
+$query = "INSERT INTO paintings(name, imageFile, year, artistID, medium, style) VALUES(:name, :imageFile, :year, :artist, :medium, :style)";
 $stmt = $conn->prepare($query);
 $stmt->execute($data);

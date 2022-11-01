@@ -108,6 +108,25 @@ class sql_commands
                     }
                 }
                 return $returnArr;
+
+            case "artistName":
+                $sqlStyles = "SELECT artistID, artistName FROM artists ORDER BY artistID";
+                $sqlResults = $conn->prepare($sqlStyles);
+                $sqlResults->execute();
+
+                $returnArr = array();
+                $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($data as $value)
+                {
+                    $item = $value['artistName'];
+
+                    if ($item != 'UNKNOWN ARTIST')
+                    {
+                        $returnArr[] = $item;
+                    }
+                }
+                return $returnArr;
         }
     }
 
