@@ -69,7 +69,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
             <?php
             if ($task == 'delete')
             {
-                sql_commands::Delete($_GET['deleteId'], $conn);
+                sql_commands::Delete($_GET['deleteId'], "paintings", $conn);
             }
 
             $stmtImages = $conn->prepare($sqlImages);

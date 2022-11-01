@@ -111,11 +111,25 @@ class sql_commands
         }
     }
 
-    public static function Delete($id, $conn)
+    public static function Delete($id, $table, $conn)
     {
-        $sqlQuery = "DELETE FROM paintings WHERE id='" . $id . "'";
-        $sqlResults = $conn->prepare($sqlQuery);
-        $sqlResults->execute();
-    }
+        if ($table == "paintings")
+        {
+            $sqlQuery = "DELETE FROM paintings WHERE id='" . $id . "'";
+            $sqlResults = $conn->prepare($sqlQuery);
+            $sqlResults->execute();
+        }
+        elseif ($table == "artists")
+        {
+            //Set the artistID on the paintings to unknown if that artistID is going to be deleted.
+            $sqlQuery = "UPDATE paintings SET artistID = 1 WHERE artistID='" . $id . "'";
+            $sqlResults = $conn->prepare($sqlQuery);
+            $sqlResults->execute();
 
+            //Delete the artist from the artist table
+            $sqlQuery = "DELETE FROM artists WHERE artistID='" . $id . "'";
+            $sqlResults = $conn->prepare($sqlQuery);
+            $sqlResults->execute();
+        }
+    }
 }

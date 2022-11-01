@@ -13,10 +13,17 @@ include_once(dirname(__DIR__) . '/shared/head.php');
 include_once(dirname(__DIR__) . '/shared/navbar.php');
 include_once(dirname(__DIR__) . '/script/ArtistModel.php');
 
-$task;
-set1
-set2
-set3
+$search = "noSearch";
+$task = "noTask";
+if(isset($_POST['search']))
+{
+        $search = $_POST['search'];
+        $task = "search";
+        echo '<script>console.log("' . $search . '");</script>';
+        $sqlImages = "SELECT * FROM artists WHERE artistName LIKE '%" . $search . "%' ORDER BY artistName";
+        $task = 'search';
+        $title = "Results for " . $_POST['search'];
+}
 
 if (isset($_GET['id']))
 {
@@ -51,12 +58,40 @@ if (isset($_GET['id']))
         echo "</table>";
         echo '</main>';
 }
-elseif (isset($search) $task == "")
+elseif ($task == "search")
 {
+        $stmtImages = $conn->prepare($sqlImages);
+        $stmtImages->execute();
+
+        echo '<main class="mainContentAlignment">';
+        echo "
+                <table class='table'> 
+                <thead>
+                <tr>
+                    <th scope=\"col\">Name</th>
+                    <th scope=\"col\">Image</th>
+                    <th scope=\"col\">Style</th>
+                    <th scope=\"col\">Life Span</th>
+                </tr>
+                </thead>";
+        while ($row = $stmtImages->fetch())
+        {
+                echo '<tr>';
+                echo "<td scope = \"row\">" . $row['artistName'];
+                echo "</td>";
+                echo "<td scope = \"row\">" . '<img src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 450px" . "height = 450px"/>' . "</td>";
+                echo "<td scope = \"row\">" . $row['style'] . "</td>";
+                echo "<td scope = \"row\">" . $row['lifeSpan'] . "</td>";
+                echo '</tr>';
+        }
+        echo "</table>";
+        echo '</main>';
 }
+/*
 elseif(isset(create)){
 
 }
 elseif(isset(singleGet))
 
+*/
 ?>

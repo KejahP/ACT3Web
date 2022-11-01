@@ -37,13 +37,12 @@ switch ($type)
         <!DOCTYPE html>
         <html lang="en">
 
-        <head>
-            <meta http-equiv="Refresh" content="0; ../pages/ArtistTable.php">
-        </head>
-
-        <body>
-            <a href="../pages/painting_filtered.php">Click here to redirect</a>
-        </body>
+        <form class="d-flex searchSizing" action="../pages/ArtistFiltered.php" method="post" id="form">
+            <input readonly class="form-control" placeholder="Search" type="search" name="search" value="<?php echo $search ?>">
+        </form>
+        <script type="text/javascript">
+            document.getElementById('form').submit();
+        </script>
 
         </html>
     <?php
