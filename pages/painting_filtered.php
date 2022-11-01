@@ -49,11 +49,12 @@ include_once(dirname(__DIR__) . '/shared/head.php');
         <?php
         echo '<h1>' . $title . '</h1>';
 
+        //Creates a new painting into the database.
         if ($task == 'create')
         {
             painting::CreateNew();
         }
-        else if ($task == 'singleGet')
+        else if ($task == 'singleGet') //When the 'go to' button is pressed it will populate an update page.
         {
 
             $stmtImages = $conn->prepare($sqlImages);
@@ -69,7 +70,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                 }
             }
         }
-        else if ($task == 'search')
+        else if ($task == 'search') //When a search is performed 
         {
             $stmtImages = $conn->prepare($sqlImages);
             $stmtImages->execute();

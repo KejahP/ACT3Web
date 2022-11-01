@@ -9,21 +9,26 @@
 -->
 
 <?php
-        include_once(dirname(__DIR__) . '/shared/head.php');
-        include_once(dirname(__DIR__) . '/shared/navbar.php');
-        include_once(dirname(__DIR__) . '/script/ArtistModel.php');
+include_once(dirname(__DIR__) . '/shared/head.php');
+include_once(dirname(__DIR__) . '/shared/navbar.php');
+include_once(dirname(__DIR__) . '/script/ArtistModel.php');
 
-        if(isset($_GET['id']))
-        {
-                $ID = $_GET['id'];
-                $multi = false;
-                $sqlImages = "SELECT artistID, artistName, imageFile, style, lifeSpan FROM artists WHERE artistID = '$ID'";
+$task;
+set1
+set2
+set3
 
-                $stmtImages = $conn->prepare($sqlImages);
-                $stmtImages->execute();
-                 
-                echo '<main class="mainContentAlignment">';
-                echo "
+if (isset($_GET['id']))
+{
+        $ID = $_GET['id'];
+        $multi = false;
+        $sqlImages = "SELECT artistID, artistName, imageFile, style, lifeSpan FROM artists WHERE artistID = '$ID'";
+
+        $stmtImages = $conn->prepare($sqlImages);
+        $stmtImages->execute();
+
+        echo '<main class="mainContentAlignment">';
+        echo "
                 <table class='table'> 
                 <thead>
                 <tr>
@@ -33,20 +38,25 @@
                     <th scope=\"col\">Life Span</th>
                 </tr>
                 </thead>";
-                while ($row = $stmtImages->fetch())
-                {
-                        echo '<tr>';
-                        echo "<td scope = \"row\">" . $row['artistName'];
-                        //echo " <input class='form-control' type='text' placeholder='Name' id='pname' name='pname' value='$row['artistName']'>";
-                        echo "</td>";
-
-                        echo "<td scope = \"row\">" . '<img src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 450px" . "height = 450px"/>'. "</td>";
-                        echo "<td scope = \"row\">" . $row['style'] . "</td>";
-                        echo "<td scope = \"row\">" . $row['lifeSpan'] . "</td>";
-                        echo '</tr>';
-                }
-                echo "</table>";
-
-                echo '</main>';
+        while ($row = $stmtImages->fetch())
+        {
+                echo '<tr>';
+                echo "<td scope = \"row\">" . $row['artistName'];
+                echo "</td>";
+                echo "<td scope = \"row\">" . '<img src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 450px" . "height = 450px"/>' . "</td>";
+                echo "<td scope = \"row\">" . $row['style'] . "</td>";
+                echo "<td scope = \"row\">" . $row['lifeSpan'] . "</td>";
+                echo '</tr>';
         }
+        echo "</table>";
+        echo '</main>';
+}
+elseif (isset($search) $task == "")
+{
+}
+elseif(isset(create)){
+
+}
+elseif(isset(singleGet))
+
 ?>

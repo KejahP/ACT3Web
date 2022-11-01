@@ -2,16 +2,18 @@
 $type;
 $search;
 
+//Takes in the type of radio button that has been selected through the value='' on the form
 if (isset($_POST['flexRadioSearch']))
 {
     $type = $_POST['flexRadioSearch'];
 }
+//The term that is posted
 if (isset($_POST['search']))
 {
     $search = $_POST['search'];
 }
 
-
+//Switches between types to give the correct page to load
 switch ($type)
 {
     case "painting":
