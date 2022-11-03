@@ -5,7 +5,7 @@
         Rhys Gillham
         M133320
 
-        Test Method for performing an edit operation
+        This will attempt to commit POST data and then refresh to the artist table.
 -->
 <?php
 include_once(dirname(__DIR__) . '/script/connection.php');
@@ -16,7 +16,7 @@ echo
     <html lang=\"en\">
 
     <head>
-        <meta http-equiv=\"Refresh\" content=\"3; ../pages/painting_table.php\">
+        <meta http-equiv=\"Refresh\" content=\"0; ../pages/ArtistTable.php\">
     </head>
 
     <body>

@@ -2,6 +2,9 @@
         Andrew Masar
         P271838
 
+        Rhys Gillham
+        M133320
+        
         Perform an edit operation for a single artist in the database
 -->
 <?php
@@ -14,7 +17,7 @@ echo
     <html lang=\"en\">
 
     <head>
-        <meta http-equiv=\"Refresh\" content=\"0; ../pages/ArtistFiltered.php?id=" . $_POST['pid'] . "\">
+        <meta http-equiv=\"Refresh\" content=\"0; ../pages/ArtistFiltered.php?id=" . $_POST['aid'] . "\">
     </head>
 
     <body>

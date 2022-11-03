@@ -122,7 +122,7 @@ class sql_commands
                     $item[0] = $value['artistID'];
                     $item[1] = $value['artistName'];
 
-                        $returnArr[] = $item;
+                    $returnArr[] = $item;
                 }
                 return $returnArr;
         }

@@ -1,3 +1,10 @@
+<!--
+        Rhys Gillham
+        M133320
+
+        Takes in the original form along with a decision of what table it is to be searched and then populates and executes a new form based on that selection.
+-->
+
 <?php
 $type;
 $search;

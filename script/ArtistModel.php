@@ -4,6 +4,9 @@
 
         Andrew-kyuuun~
         P271838
+        
+        Rhys Gillham
+        M133320
 
         This is the model for an artist, it ensures that all data is properly displayed within the tables
 -->
@@ -11,48 +14,48 @@
 <?php
 class artist
 {
-    public $artistID;
-    public $artistName;
-    public $imageFile;
-    public $style;
-    public $lifeSpan;
+  public $artistID;
+  public $artistName;
+  public $imageFile;
+  public $style;
+  public $lifeSpan;
 
-    // Default Constructor for artist
-    public function __construct( $artistID,  $artistName, $imageFile, $style, $lifeSpan)
-    {
-      $this->artistID = $artistID;
-      $this->artistName = $artistName;
-      $this->imageFile = $imageFile;
-      $this->style = $style;
-      $this->lifeSpan = $lifeSpan;
-    }
+  // Default Constructor for artist
+  public function __construct($artistID,  $artistName, $imageFile, $style, $lifeSpan)
+  {
+    $this->artistID = $artistID;
+    $this->artistName = $artistName;
+    $this->imageFile = $imageFile;
+    $this->style = $style;
+    $this->lifeSpan = $lifeSpan;
+  }
 
-    // Overloaded Constructor for artist from table row * not sure about 
-    public static function ArtRow($row)
-    {
-      $newArtist = new static
-      (
+  // Overloaded Constructor for artist from table row * not sure about 
+  public static function ArtRow($row)
+  {
+    $newArtist = new static(
         $row['artistID'],
         $row['artistName'],
         $row['imageFile'],
         $row['style'],
         $row['lifeSpan']
       );
-      
-      return $newArtist;
-    }
 
-    // Create Image Html Element from artists imageFile
-    function createImage($height, $width)
+    return $newArtist;
+  }
+
+  // Create Image Html Element from artists imageFile
+  function createImage($height, $width)
   {
     return '<img src = "data:image/png;base64,' . base64_encode($this->imageFile) . '" width = "' . $width . '" height = "' . $height . '"/>';
   }
 
-    // Andrew Masar P271838
-    // Return FormGroup for editing artists
-    function EditArtist()
-    {// /script/testMethod.php is currently the edit method for painting model
-      echo "<form class='row g-3' action='../script/EditArtist.php' method='post' target='_self' enctype='multipart/form-data'> 
+  // Andrew Masar P271838
+  // Return FormGroup for editing artists
+  function EditArtist()
+  { // /script/testMethod.php is currently the edit method for painting model
+
+    echo "<form class='row g-3' action='../script/EditArtist.php' method='post' target='_self' enctype='multipart/form-data'> 
       <table class='table'>
           <thead>
             <th scope=\"col\"></th>
@@ -73,8 +76,8 @@ class artist
 
           <tr>
             <td>" .
-              $this->createImage('300px', '300px') .
-            "</td>
+      $this->createImage('300px', '300px') .
+      "</td>
           </tr>
 
           <tr>
@@ -82,7 +85,7 @@ class artist
               $this->lifeSpan
             </td>
             <td>
-              <input class='form-control' type='text' placeholder='LifeSpan' id='alifespan' name='plifespan' value='$this->lifeSpan'>
+              <input class='form-control' type='text' placeholder='LifeSpan' id='alifespan' name='alifespan' value='$this->lifeSpan'>
             </td>
           </tr>
 
@@ -91,19 +94,19 @@ class artist
               $this->style 
             </td>
             <td>
-              <input class='form-control' type='text' placeholder='Style' id='astyle' name='pstyle' value='$this->style'>
+              <input class='form-control' type='text' placeholder='Style' id='astyle' name='astyle' value='$this->style'>
             </td>
           </tr>
         </table>
         <input class='btn' type='submit'>
     </form>";
-    }
+  }
 
-    // Andrew Masar P271838
-    // Return FormGroup for Creating New Artists
-    function CreateArtist()
-    {// /script/testMethod.php is currently the edit method for painting model
-      echo "<form class='row g-3' action='../script/CreateArtist.php' method='post' target='_self' enctype='multipart/form-data'> 
+  // Andrew Masar P271838
+  // Return FormGroup for Creating New Artists
+  static function CreateArtist()
+  { // /script/testMethod.php is currently the edit method for painting model
+    echo "<form class='row g-3' action='../script/CreateArtist.php' method='post' target='_self' enctype='multipart/form-data'> 
               <table class='table'>
                   <thead>
                     <th scope=\"col\"></th>
@@ -138,8 +141,7 @@ class artist
               <input class='btn' type='submit'>
 
           </form>";
-    }
-
+  }
 }
 
 ?>

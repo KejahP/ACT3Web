@@ -45,23 +45,11 @@ class painting
     return '<img src = "data:image/png;base64,' . base64_encode($this->image) . '" width = "' . $width . '" height = "' . $height . '"/>';
   }
 
+  //Returns the update webpage for the painting model along.
   function FormGroup($conn)
   {
     $artists = sql_commands::returnQuery("artistName", $conn);
-?>
-    <script>
-      <?php
-      foreach ($artists as $data)
-      {
 
-        echo "console . log('" . $data[0] . " : " . $data[1] . "');";
-      }
-      ?>
-    </script>
-<?php
-
-    //echo " <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>"
-    // <input type='image' id='pimage' name='pimage' value='".base64_encode($this->image)."' style='visibility: hidden;'>
     echo "<form class='row g-3' action='../script/testMethod.php' method='post' target='_self' enctype='multipart/form-data'>
       <table class='table'>
           <thead>
@@ -104,7 +92,7 @@ class painting
                 <input list='artistID' id='partist' name='partist' placeholder='Artist Name' required>
                 <datalist id='artistID'>
                 ";
-    foreach ($artists as $data)
+    foreach ($artists as $data) //Iterates through the available artists to give the users the ability to select an artist that exists within the database.
     {
       echo "<option value='" . $data[0] . "'>" . $data[1] . "</option>";
     }
@@ -132,6 +120,7 @@ class painting
     </form>";
   }
 
+  //Returns the new webpage for a new entry into the paintings.
   public static function CreateNew($conn)
   {
     $artists = sql_commands::returnQuery("artistName", $conn);
@@ -167,7 +156,7 @@ class painting
                 <input list='artistID' id='partist' name='partist' placeholder='Artist Name' required>
                 <datalist id='artistID'>
                 ";
-    foreach ($artists as $data)
+    foreach ($artists as $data) //Iterates through the available artists to give the users the ability to select an artist that exists within the database.
     {
       echo "<option value='" . $data[0] . "'>" . $data[1] . "</option>";
     }
