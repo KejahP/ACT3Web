@@ -34,6 +34,12 @@ $data = [
     'id' => $_POST['pid'],
 ];
 
-$query = "UPDATE paintings SET name=:name, year=:year, artist=:artist, medium=:medium, style=:style WHERE id=:id";
+$query = "UPDATE paintings SET name=:name, year=:year, artistID=:artist, medium=:medium, style=:style WHERE id=:id";
+foreach($data as $entry){
+    echo "<script>console.log('" . $entry . "');</script>";
+}
+
+
 $stmt = $conn->prepare($query);
 $stmt->execute($data);
+?>

@@ -1,5 +1,0 @@
-INSERT INTO paintings 
-(imageFile, year, artist, medium, style)
-VALUES 
-(LOAD_FILE('D:\87309351_p0_master1200.jpg'), 1998, 'TestArtistTwo', 'TestMediumTwo', 'TestStyleFeet')
-;

@@ -9,6 +9,7 @@
         
         This is the template for the display of a painting, it contains the page an error message if the item could not be located within the database.
 -->
+
 <?php
 $pageNotLoaded = true;
 $title = "";
@@ -21,10 +22,16 @@ if (isset($_GET['id']))
     $multiplePaintings = false;
     $task = 'singleGet';
     $sqlImages = "SELECT * FROM paintings WHERE id = $painting_id";
+    $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
+    FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.id = $painting_id ORDER BY paintings.name";
 }
 else if (isset($_POST['search']))
-{ //Determines if there was a posted search value and sets the query variable
-    $sqlImages = "SELECT * FROM paintings WHERE name= '" . $_POST['search'] . "'";
+{
+    $search = $_POST['search'];
+    $task = "search";
+    echo '<script>console.log("' . $search . '");</script>';
+    $sqlImages = "SELECT paintings.id, paintings.name, paintings.imageFile, paintings.year, paintings.medium, paintings.style, artists.artistName 
+    FROM paintings JOIN artists ON paintings.artistID = artists.artistID WHERE paintings.name LIKE '%" . $search . "%' ORDER BY paintings.name";
     $task = 'search';
     $title = "Results for " . $_POST['search'];
 }
@@ -42,11 +49,12 @@ include_once(dirname(__DIR__) . '/shared/head.php');
         <?php
         echo '<h1>' . $title . '</h1>';
 
+        //Creates a new painting into the database.
         if ($task == 'create')
         {
-            painting::CreateNew();
+            painting::CreateNew($conn);
         }
-        else if ($task == 'singleGet')
+        else if ($task == 'singleGet') //When the 'go to' button is pressed it will populate an update page.
         {
 
             $stmtImages = $conn->prepare($sqlImages);
@@ -62,22 +70,12 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                 }
             }
         }
-        else if ($task == 'search')
+        else if ($task == 'search') //When a search is performed 
         {
             $stmtImages = $conn->prepare($sqlImages);
             $stmtImages->execute();
 
-            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH))
-            {
-                if ($row != null)
-                {
-                    $pageNotLoaded = false;
-                    $a = painting::FromRow($row);
-
-
-                    if ($multiplePaintings)
-                    { //Will place a clickable button that goes to that image directly if there could be multiple items on the page.
-                        echo "
+            echo "
                         <table class='table'> 
                         <thead>
                         <tr>
@@ -89,6 +87,13 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                             <th scope=\"col\">Style</th>
                         </tr>
                         </thead>";
+            while ($row = $stmtImages->fetch(PDO::FETCH_BOTH))
+            {
+                if ($row != null)
+                {
+                    $pageNotLoaded = false;
+                    $a = painting::FromRow($row);
+
                         echo '<tr>';
                         echo '<td>' .  $a->name . '</td>';
                         echo '<td>' .
@@ -100,10 +105,9 @@ include_once(dirname(__DIR__) . '/shared/head.php');
                         echo '<td>' . $a->style . ' </td>';
                         echo '<td> <a class=\'btn btn-primary\' method="post" href="painting_filtered.php?id=' . $a->id . '">Go To</a>';
                         echo '</tr>';
-                        echo "</table>";
-                    }
                 }
             }
+            echo "</table>";
         }
         else
         {

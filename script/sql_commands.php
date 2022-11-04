@@ -35,7 +35,7 @@ class sql_commands
 
             case "artist":
 
-                $sqlStyles = "SELECT artist FROM paintings ORDER BY artist";
+                $sqlStyles = "SELECT DISTINCT artistName FROM artists ORDER BY artistName";
 
                 $sqlResults = $conn->prepare($sqlStyles);
                 $sqlResults->execute();
@@ -46,8 +46,9 @@ class sql_commands
 
                 foreach ($data as $value)
                 {
-                    $item = $value['artist'];
-                    if (!in_array($item, $returnArr))
+                    $item = $value['artistName'];
+                    //Failsafe - Will leave UNKNOWN ARTIST off the list
+                    if ($item != 'UNKNOWN ARTIST')
                     {
                         $returnArr[] = $item;
                     }
@@ -64,14 +65,88 @@ class sql_commands
                 $returnArr = $stmtImages->fetch(PDO::FETCH_BOTH);
 
                 return $returnArr;
+
+            case "artStyle":
+
+                //selects artists by style from the database and orders them alphabetically
+                $sqlStyles = "SELECT DISTINCT style FROM artists ORDER BY style";
+                $sqlResults = $conn->prepare($sqlStyles);
+                $sqlResults->execute();
+
+                $returnArr = array();
+                $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($data as $value)
+                {
+                    $item = $value['style'];
+
+                    if ($item != "UNKNOWN STYLE")
+                    {
+
+                        $returnArr[] = $item;
+                    }
+                }
+                return $returnArr;
+
+
+                //change to art medium once I figure out how to implement it
+            case "artLife":
+                $sqlStyles = "SELECT DISTINCT lifeSpan FROM artists ORDER BY lifeSpan";
+                $sqlResults = $conn->prepare($sqlStyles);
+                $sqlResults->execute();
+
+                $returnArr = array();
+                $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($data as $value)
+                {
+                    $item = $value['lifeSpan'];
+
+                    if ($item != 'UNKNOWN LIFESPAN')
+                    {
+                        $returnArr[] = $item;
+                    }
+                }
+                return $returnArr;
+
+            case "artistName":
+                $sqlStyles = "SELECT artistID, artistName FROM artists ORDER BY artistID";
+                $sqlResults = $conn->prepare($sqlStyles);
+                $sqlResults->execute();
+
+                $returnArr = array();
+                $data = $sqlResults->fetchAll(PDO::FETCH_ASSOC);
+
+                foreach ($data as $value)
+                {
+                    $item[0] = $value['artistID'];
+                    $item[1] = $value['artistName'];
+
+                    $returnArr[] = $item;
+                }
+                return $returnArr;
         }
     }
 
-    public static function Delete($id, $conn)
+    public static function Delete($id, $table, $conn)
     {
-        $sqlStyles = "DELETE FROM paintings WHERE id='" . $id . "'";
+        if ($table == "paintings")
+        {
+            $sqlQuery = "DELETE FROM paintings WHERE id='" . $id . "'";
+            $sqlResults = $conn->prepare($sqlQuery);
+            $sqlResults->execute();
+        }
+        elseif ($table == "artists")
+        {
+            //Set the artistID on the paintings to unknown if that artistID is going to be deleted.
+            $sqlQuery = "UPDATE paintings SET artistID = 1 WHERE artistID='" . $id . "'";
+            $sqlResults = $conn->prepare($sqlQuery);
+            $sqlResults->execute();
 
-        $sqlResults = $conn->prepare($sqlStyles);
-        $sqlResults->execute();
+            //Delete the artist from the artist table
+            $sqlQuery = "DELETE FROM artists WHERE artistID='" . $id . "'";
+            $sqlResults = $conn->prepare($sqlQuery);
+            $sqlResults->execute();
+        }
     }
 }

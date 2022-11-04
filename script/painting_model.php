@@ -35,7 +35,7 @@ class painting
   // Overloaded Constructor OR static constructor, work around for limitation of only having one constructor per class
   public static function FromRow($row)
   {
-    $newPainting = new static($row['id'], $row['name'], $row['imagefile'], $row['year'], $row['artist'], $row['medium'], $row['style']);
+    $newPainting = new static($row['id'], $row['name'], $row['imageFile'], $row['year'], $row['artistName'], $row['medium'], $row['style']);
     return $newPainting;
   }
 
@@ -45,10 +45,11 @@ class painting
     return '<img src = "data:image/png;base64,' . base64_encode($this->image) . '" width = "' . $width . '" height = "' . $height . '"/>';
   }
 
-  function FormGroup()
+  //Returns the update webpage for the painting model along.
+  function FormGroup($conn)
   {
-    //echo " <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/testMethod.php' method='post' target='_self'>"
-    // <input type='image' id='pimage' name='pimage' value='".base64_encode($this->image)."' style='visibility: hidden;'>
+    $artists = sql_commands::returnQuery("artistName", $conn);
+
     echo "<form class='row g-3' action='../script/testMethod.php' method='post' target='_self' enctype='multipart/form-data'>
       <table class='table'>
           <thead>
@@ -70,8 +71,8 @@ class painting
 
           <tr>
             <td>" .
-              $this->createImage('300px', '300px') .
-            "</td>
+      $this->createImage('300px', '300px') .
+      "</td>
           </tr>
 
           <tr>
@@ -87,7 +88,17 @@ class painting
               $this->artist 
             </td>
             <td>
-              <input class='form-control' type='text' placeholder='Artist' id='partist' name='partist'value='$this->artist'>
+            <div>
+                <input list='artistID' id='partist' name='partist' placeholder='Artist Name' required>
+                <datalist id='artistID'>
+                ";
+    foreach ($artists as $data) //Iterates through the available artists to give the users the ability to select an artist that exists within the database.
+    {
+      echo "<option value='" . $data[0] . "'>" . $data[1] . "</option>";
+    }
+    echo "
+                  </datalist>
+            </div>
             </td>
           </tr>
           <tr>
@@ -109,10 +120,13 @@ class painting
     </form>";
   }
 
-  public static function CreateNew()
+  //Returns the new webpage for a new entry into the paintings.
+  public static function CreateNew($conn)
   {
+    $artists = sql_commands::returnQuery("artistName", $conn);
     echo "
-    <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) . "/script/createMethod.php' method='post' target='_self' enctype='multipart/form-data'>
+    <form class='row g-3' action='" . dirname($_SERVER['PHP_SELF'], 2) .
+      "/script/createMethod.php' method='post' target='_self' enctype='multipart/form-data'>
       <table class='table'>
           <thead>
             <th scope=\"col\"></th>
@@ -138,7 +152,17 @@ class painting
           </tr>
           <tr>
             <td>
-              <input class='form-control' type='text' placeholder='Artist' id='partist' name='partist'>
+              <div>
+                <input list='artistID' id='partist' name='partist' placeholder='Artist Name' required>
+                <datalist id='artistID'>
+                ";
+    foreach ($artists as $data) //Iterates through the available artists to give the users the ability to select an artist that exists within the database.
+    {
+      echo "<option value='" . $data[0] . "'>" . $data[1] . "</option>";
+    }
+    echo "
+                  </datalist>
+            </div>
             </td>
           </tr>
           <tr>
@@ -155,6 +179,4 @@ class painting
         <input class='btn' type='submit'>
     </form>";
   }
-
-
 }

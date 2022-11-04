@@ -18,12 +18,12 @@ include_once(dirname(__DIR__) . '/shared/head.php');
         <h1>Welcome</h1>
         <div class="container text-center">
             <p>
-                Manager: Kejah Pulman (30034444)
+                Manager: Andrew Masar (P271838)
             </p>
             <p>
             <ul> Programmers:
                 <li>Rhys Gillham (M133320)</li>
-                <li>Andrew Masar (P271838) </li>
+                <li>Kejah Pulman (30034444)</li>
             </ul>
             <p>
                 Website for Agile Web Development AT3 - Sprint One.
