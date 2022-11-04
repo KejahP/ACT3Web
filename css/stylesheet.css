@@ -1,0 +1,35 @@
+body {
+    font-size: 62.5%;
+    color: black;
+}
+
+li {
+    list-style: none;
+    color: inherit;
+}
+
+.mainContentAlignment {
+    width: 50%;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+.searchSizing {
+    width: 50%;
+}
+
+li>.btn {
+    font: bold;
+    size: 4rem;
+}
+
+header {
+    background-image: url("https://www.shbarcelona.com/blog/en/wp-content/uploads/2017/09/art-gallery.jpg");
+    background-position: center;
+    background-size: auto;
+}
+
+.navStyle {
+    background-color: rgba(223, 187, 135, 0.75);
+    font-weight: bold;
+}
