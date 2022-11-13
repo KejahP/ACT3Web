@@ -54,7 +54,6 @@ switch ($type)
         </html>
     <?php
         break;
-
     default:
     ?>
         <!DOCTYPE html>

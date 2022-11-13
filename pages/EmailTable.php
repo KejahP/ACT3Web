@@ -10,13 +10,19 @@
     include_once(dirname(__DIR__) . '/shared/navbar.php');
     include_once(dirname(__DIR__) . '/script/connection.php');
     include_once(dirname(__DIR__) . '/shared/head.php');
-
+    
     echo '<h1>' . "Client Emails" . '</h1>';
     $sqlEmail = "SELECT * FROM member ORDER BY member.firstName";
 ?>
 
 <body>
     <main class="mainContentAlignment">
+
+    <form class="d-flex searchSizing" action="../script/EmailFiltered.php">
+        <input class="form-control" placeholder="Search" type="search" name="search">
+        <input class="btn" type="submit">
+    </form>
+
         <table class="table">
             <thead>
                 <th scope="col">firstName</th>
@@ -44,7 +50,7 @@
                     echo "</tr>";
                 }
 
-                //testing of the email page DELETE LATER BITCH
+                //testing of the email page
                 include_once(dirname(__DIR__) . '/shared/email.php');
 
             ?>
