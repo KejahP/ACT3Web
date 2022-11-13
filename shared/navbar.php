@@ -8,6 +8,25 @@
 include_once(dirname(__DIR__) . '/script/connection.php');        //Currently set to connect to xampp using a copy of Andrews initial ConnectionHome.php in resources.
 include_once(dirname(__DIR__) . '/script/sql_commands.php');
 include_once(dirname(__DIR__) . '/script/painting_model.php');
+
+//  TEST - LogInDetails
+include_once(dirname(__DIR__) . '/script/@SubmissionForm.php');
+//
+$email;
+if(isset($_POST['sEmail']))
+    {
+        $email = "An Email";
+    // First GET signUpEmail from DB, see if there email is already in the db or
+
+    // IF signUpEmail is not Present in DB than add user to DB
+
+    // ELSE User is already in DB return a message stating that the email already exists
+    }
+    else
+    {
+        $email = "No Email";
+    }
+// END TEST
 ?>
 <header class="">
     <nav class="navStyle row">
@@ -151,6 +170,49 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                 <input class="btn" type="submit">
             </form>
 
+        </div>
+
+         <!--
+            Andrew Masar P271838
+            Login Drop Down Form
+            Drop Down - Ask to either login, or create new account, if creating new add new options, POSSIBLY add new `_POST['isCreating']` boolean value> Can also hide controls based on creating new or not?
+            Sign up must have Name, EmailAddress, Password, and Two Check Boxes for Monthly News and Breaking News
+            Login must have EmailAddress and Password
+        -->
+        <div class="col p-2">
+
+            <!--
+                Button Group for Login Dropdown Menu
+            -->
+            <div class="btn-group w-75"> 
+
+                <!--Button, Manually Closable, opens the 'login' dropdown menu-->
+                <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                    Members
+                </button>
+                
+                <!--
+                    Drop Down Menu
+                    Contain login form, and signup form.
+                    If user is not logged in, then option to login should be present
+                    Must Contain option to create user as well
+                -->
+                <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuClickable">
+                    <?php
+                    #   Print the Sign Up form html elements into the DropDown menu
+                        SubmissionForm::SignUpForm(); 
+                        SubmissionForm::SignUpUserToDB();
+                    ?>
+                    <!--
+                        Log Out
+                        If User IS logged in, display Welcome User Name, have link to Members Settings
+                    -->
+
+                    <!--
+                        Sign Up Form
+                    -->
+                </ul>
+            </div>
         </div>
     </nav>
 </header>
