@@ -20,6 +20,13 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                         Home
                     </a>
                 </li>
+
+                <li>
+                    <a class="btn" href="EmailTable.php">
+                        Client Emails
+                    </a>
+                </li>
+                
                 <!--Overall browse options-->
                 <li class="dropdown">
                     <button class="btn dropdown-toggle" type="" data-bs-toggle="dropdown">Browse</button>
@@ -117,6 +124,10 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
                             ?>
                         </ul>
                     </ul>
+                </li>
+
+                <li class="login">
+                        
                 </li>
         </div>
         <div class="col p-2">
