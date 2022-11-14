@@ -1,5 +1,5 @@
 <?php
-/**
+    /**
      * Member
      * Member Object for Pulling Entries from the database
      */
@@ -41,9 +41,9 @@
          * GetMember
          * Query the Database for the member with a matching email and name
          * */   
-        public static function GetMember($email, $name)
+        public static function GetMember($conn, $email, $name)
         {
-            $sqlQuery = "SELECT * FROM members WHERE email='".$email."' AND name='".$name."'";
+            $sqlQuery = "SELECT * FROM member WHERE email='".$email."' AND name='".$name."'";
             $stmt = $conn->prepare($sqlQuery);  //  Saying conn is undefined, but it should be accessible
             $stmt->execute();
             $member = null;

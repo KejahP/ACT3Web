@@ -18,14 +18,13 @@
     include_once(dirname(__DIR__) . '/script/sql_commands.php');
     include_once(dirname(__DIR__) . '/script/MemberModel.php');
 
-    $member = null;
-    
-    //  Get the member
-    if(isset($_POST['email']) && isset($_POST['name']))
-    {
-        $member = Member::GetMember($_POST['email'], $_POST['name']);
+    $member = Member::GetMember($conn, $_POST['sEmail'], $_POST['sName']);
 
-    }
+    //  Get the member
+    //if(isset($_POST['sEmail']) && isset($_POST['sName']))
+    //{
+        //$member = Member::GetMember($conn, $_POST['sEmail'], $_POST['sName']);
+    //}
         
     /*
         TO DO:
@@ -39,12 +38,17 @@
         <?php include_once(dirname(__DIR__) . '/shared/navbar.php'); ?>
         <main class="mainContentAlignment outline">
             <?php
+            /*
                 if(isset($_POST['sEmail']))
                 {
                     echo $_POST['sEmail'];
                 };
-
-
+            */
+                echo "<p>$member->name</p>";
+                echo "<p>$member->email</p>";
+                echo "<p>$member->monthlyNews</p>";
+                echo "<p>$member->breakingNews</p>";
+                echo "<p>$member->deleteRequest</p>";
             ?>
         </main>
     </body>

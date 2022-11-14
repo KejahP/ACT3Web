@@ -90,20 +90,10 @@
                                             <input type='email' class='form-control' id='sEmail' name='sEmail' placeholder='email@example.com'>
                                         </div>
                                         <div class='mb-3'>
-                                            <div class='form-check'>
-                                                <ul>
-                                                    <li>
-                                                        <label class='form-check-label' for='sMonthly'>Monthly News Roundup</label>
-                                                        <input type='checkbox' class='form-check-input' id='sMonthly' name='sMonthly' value=true>
-                                                    </li>
-                                                    <li>
-                                                        <label class='form-check-label' for='sBreaking'>Breaking News</label>
-                                                        <input type='checkbox' class='form-check-input' id='sBreaking' name='sBreaking' value=true>
-                                                    </li>
-                                                    </ul>
-                                            </div>
+                                            <label for='sName' class='form-label'>Name</label>
+                                            <input type='text' class='form-control' id='sName' name='sName' placeholder='John Doe'>
                                         </div>
-
+                                        <input type='hidden' id='task' name='task' value='updateMember'>
                                         <input class='btn btn-primary' type='submit'/>
                                     </form>
                                 </div>
@@ -127,9 +117,9 @@
                 {
                     SubmissionForm::SignUpUserToDB($conn);
                 }
-                else if ($_POST['task'] == "update")
+                else
                 {
-    
+
                 }
             }
             
