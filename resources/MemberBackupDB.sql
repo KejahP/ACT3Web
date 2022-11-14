@@ -27,10 +27,8 @@ SET time_zone = "+00:00";
 -- Table structure for table `member`
 --
 
-DROP TABLE IF EXISTS member;
-
 CREATE TABLE `member` (
-  `id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` INT  NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `monthlyNews` BOOLEAN DEFAULT FALSE NOT NULL,

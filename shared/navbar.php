@@ -11,6 +11,8 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
 
 //  TEST - LogInDetails
 include_once(dirname(__DIR__) . '/script/@SubmissionForm.php');
+include_once(dirname(__DIR__) . '/script/AdminLogin.php');
+
 //
 
 ?>
@@ -193,6 +195,18 @@ include_once(dirname(__DIR__) . '/script/@SubmissionForm.php');
                     -->
                 </ul>
             </div>
+
+            <div class="col p-2">
+            <div class="btn-group w-75"> 
+                <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                    Login
+                </button>
+                <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuClickable">
+                    <?php
+                        SubLog::Login($conn);
+                    ?>
+            </div>
+        </div>
         </div>
     </nav>
 </header>
