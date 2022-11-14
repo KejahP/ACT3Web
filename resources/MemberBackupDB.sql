@@ -28,8 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `member` (
-  `firstName` varchar(100) NOT NULL,
-  `lastName` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `monthlyNews` BOOLEAN DEFAULT FALSE NOT NULL,
   `breakingNews` BOOLEAN DEFAULT FALSE NOT NULL,

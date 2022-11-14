@@ -54,11 +54,11 @@
                                 <ul>
                                     <li>
                                         <label class='form-check-label' for='sMonthly'>Monthly News Roundup</label>
-                                        <input type='checkbox' class='form-check-input' id='sMonthly' name='sMonthly' value='true'>
+                                        <input type='checkbox' class='form-check-input' id='sMonthly' name='sMonthly' value=true>
                                     </li>
                                     <li>
                                         <label class='form-check-label' for='sBreaking'>Breaking News</label>
-                                        <input type='checkbox' class='form-check-input' id='sBreaking' name='sBreaking' value='true'>
+                                        <input type='checkbox' class='form-check-input' id='sBreaking' name='sBreaking' value=true>
                                     </li>
                                     </ul>
                             </div>
@@ -70,25 +70,46 @@
             
         }
 
-                                //<button type='submit' class='btn btn-primary'>Sign Up</button>
-                                //<input class='btn btn-primary' type='submit'/>
-        public static function SignUpUserToDB()
+        //<button type='submit' class='btn btn-primary'>Sign Up</button>
+        //<input class='btn btn-primary' type='submit'/>
+        public static function SignUpUserToDB($conn)
         {
+            $monthly = true;
+            $breaking = true;
             //  Check for user input
             if(isset($_POST['sEmail']))
             {
+                $daemail = $_POST['sEmail'];
                 echo "An Email";
-            // First GET signUpEmail from DB, see if there email is already in the db or
 
-            // IF signUpEmail is not Present in DB than add user to DB
+                if(!isSet($_POST['sMonthly']))
+                {
+                    $monthly = 0;
+                }
 
-            // ELSE User is already in DB return a message stating that the email already exists
+                if(!isSet($_POST['sBreaking']))
+                {
+                    $breaking = 0;
+                }
+
+                $getEmailQuery = "INSERT INTO member(name, email, monthlyNews, breakingNews, deleteRequest) VALUES (:name, :email, :monthlyNews, :breakingNews, :deleteRequest)";
+                $data=
+                [
+                    'name' => $_POST['sName'],
+                    'email' => $_POST['sEmail'],
+                    'monthlyNews' => $monthly,
+                    'breakingNews' => $breaking,
+                    'deleteRequest' => 0,
+                ];
+
+                foreach($data as $entry)
+                {
+                    echo "<script>console.log('" . $entry . "');</script>";
+                }
+
+                $stmt = $conn->prepare($getEmailQuery);
+                $stmt->execute($data);
             }
-            else
-            {
-                echo "No Email";
-            }
-
         }
     }
 ?>

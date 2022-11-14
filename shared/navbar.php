@@ -201,7 +201,7 @@ if(isset($_POST['sEmail']))
                     <?php
                     #   Print the Sign Up form html elements into the DropDown menu
                         SubmissionForm::SignUpForm(); 
-                        SubmissionForm::SignUpUserToDB();
+                        SubmissionForm::SignUpUserToDB($conn);
                     ?>
                     <!--
                         Log Out
