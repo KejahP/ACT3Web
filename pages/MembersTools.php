@@ -14,17 +14,9 @@
     -->
     <?php
     include_once(dirname(__DIR__) . '/shared/head.php');
-    include_once(dirname(__DIR__) . '/script/connection.php');        //Currently set to connect to xampp using a copy of Andrews initial ConnectionHome.php in resources.
     include_once(dirname(__DIR__) . '/script/sql_commands.php');
     include_once(dirname(__DIR__) . '/script/MemberModel.php');
 
-    $member = Member::GetMember($conn, $_POST['sEmail'], $_POST['sName']);
-
-    //  Get the member
-    //if(isset($_POST['sEmail']) && isset($_POST['sName']))
-    //{
-        //$member = Member::GetMember($conn, $_POST['sEmail'], $_POST['sName']);
-    //}
         
     /*
         TO DO:
@@ -35,21 +27,44 @@
 
     ?>
     <body>
-        <?php include_once(dirname(__DIR__) . '/shared/navbar.php'); ?>
+        <?php include_once(dirname(__DIR__) . '/shared/navbar.php');?>
         <main class="mainContentAlignment outline">
             <?php
-            /*
-                if(isset($_POST['sEmail']))
-                {
-                    echo $_POST['sEmail'];
-                };
-            */
-                echo "<p>$member->name</p>";
-                echo "<p>$member->email</p>";
-                echo "<p>$member->monthlyNews</p>";
-                echo "<p>$member->breakingNews</p>";
-                echo "<p>$member->deleteRequest</p>";
+                //  Get the Member
+                echo "<script>console.log('POST: " . $_POST['sEmail'] . "');</script>";
+                echo "<script>console.log('POST: " . $_POST['sName'] . "');</script>";
+                $member = Member::GetMember($conn, $_POST['sEmail'], $_POST['sName']);
             ?>
+
+            <form class='px-4 py-3' action='.' method='post' target='_self'>
+                <div class='mb-3'>
+                    <label for='sEmail' class='form-label'>Email address</label>
+                    <input type='email' class='form-control' id='sEmail' name='sEmail' placeholder='email@example.com'>
+                </div>
+                <div class='mb-3'>
+                    <label for='sName' class='form-label'>Name</label>
+                    <input type='text' class='form-control' id='sName' name='sName' placeholder='John Doe'>
+                </div>
+                <div class='mb-3'>
+                    <div class='form-check'>
+                        <ul>
+                            <li>
+                                <label class='form-check-label' for='sMonthly'>Monthly News Roundup</label>
+                                <input type='checkbox' class='form-check-input' id='sMonthly' name='sMonthly' value=true>
+                            </li>
+                            <li>
+                                <label class='form-check-label' for='sBreaking'>Breaking News</label>
+                                <input type='checkbox' class='form-check-input' id='sBreaking' name='sBreaking' value=true>
+                            </li>
+                            <li>
+                                <label class='form-check-label' for='sDelete'>Delete Membership?</label>
+                                <input type='checkbox' class='form-check-input' id='sDelete' name='sDelete' value=true>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <input class='btn btn-primary' type='submit'/>
+            </form>
         </main>
     </body>
 

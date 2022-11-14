@@ -63,7 +63,7 @@
                                                         <label class='form-check-label' for='sBreaking'>Breaking News</label>
                                                         <input type='checkbox' class='form-check-input' id='sBreaking' name='sBreaking' value=true>
                                                     </li>
-                                                    </ul>
+                                                </ul>
                                             </div>
                                         </div>
 
@@ -156,14 +156,9 @@
                     'deleteRequest' => 0,
                 ];
 
-                foreach($data as $entry)
-                {
-                    echo "<script>console.log('" . $entry . "');</script>";
-                }
-
                 $stmt = $conn->prepare($insertEmailQuery);
                 $stmt->execute($data);
-            }
+            }                  
         }
     }
 ?>
