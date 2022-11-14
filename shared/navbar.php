@@ -12,21 +12,7 @@ include_once(dirname(__DIR__) . '/script/painting_model.php');
 //  TEST - LogInDetails
 include_once(dirname(__DIR__) . '/script/@SubmissionForm.php');
 //
-$email;
-if(isset($_POST['sEmail']))
-    {
-        $email = "An Email";
-    // First GET signUpEmail from DB, see if there email is already in the db or
 
-    // IF signUpEmail is not Present in DB than add user to DB
-
-    // ELSE User is already in DB return a message stating that the email already exists
-    }
-    else
-    {
-        $email = "No Email";
-    }
-// END TEST
 ?>
 <header class="">
     <nav class="navStyle row">
@@ -37,12 +23,6 @@ if(isset($_POST['sEmail']))
                 <li>
                     <a class="btn" href="index.php">
                         Home
-                    </a>
-                </li>
-
-                <li>
-                    <a class="btn" href="EmailTable.php">
-                        Client Emails
                     </a>
                 </li>
                 
@@ -200,8 +180,8 @@ if(isset($_POST['sEmail']))
                 <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuClickable">
                     <?php
                     #   Print the Sign Up form html elements into the DropDown menu
-                        SubmissionForm::SignUpForm(); 
-                        SubmissionForm::SignUpUserToDB($conn);
+                        SubmissionForm::SignUpForm($conn); 
+
                     ?>
                     <!--
                         Log Out
