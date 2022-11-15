@@ -10,8 +10,8 @@
 
 <?php
 $servername = "localhost";
-#$username = "user";    //  Turn Key
-$username = "root";     //  Xampp
+$username = "user";
+//$username = "root";
 $dbname = "paintingdb";
 
 try {
