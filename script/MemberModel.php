@@ -27,13 +27,25 @@
             $this->deleteRequest = $deleteRequest;
         }
 
+        public function ToChecked($input)
+        {
+            if($input == 1)
+            {
+                return "checked='checked'";
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         /**
          * FromRow
          * Convert a row from a database query into a new object of type Member
          */
-        public static function FromRow($row)
+        public static function FromRow($id, $name, $email, $monthly, $breaking, $delete)
         {
-            $member = new static($row['id'], $row['name'], $row['email'], $row['monthlyNews'], $row['breakingNews'], $row['deleteRequest']);
+            $member = new static($id, $name, $email, $monthly, $breaking, $delete);
             return $member;
         }
 
@@ -43,17 +55,56 @@
          * */   
         public static function GetMember($conn, $email, $name)
         {
-            $sqlQuery = "SELECT * FROM member WHERE email='".$email."' AND name='".$name."'";
+            $sqlQuery = "SELECT * FROM member WHERE email='$email' AND name='$name'";
             $stmt = $conn->prepare($sqlQuery);  //  Saying conn is undefined, but it should be accessible
             $stmt->execute();
-            $member = null;
+
             //  Create New Member Object
             while ($row = $stmt->fetch(PDO::FETCH_BOTH))
             {
-                $member = member::FromRow($row);            
+                $id = $row['id'];
+                $name = $row['name'];
+                $email = $row['email'];
+                $monthly = 0;
+                $breaking = 0;
+                $delete = 0;
+
+                if($row['monthlyNews'] == 1)
+                {
+                    $monthly = 1;
+                }
+                if($row['breakingNews'] == 1)
+                {
+                    $breaking = 1;
+                }
+                if($row['deleteRequest'] == 1)
+                {
+                    $delete = 1;
+                }
+
+                return $member = member::FromRow($id, $name, $email, $monthly, $breaking, $delete);            
             }
 
-            return $member;
+            //return $member;
+        }
+
+        /**
+         * Update Member
+         * Update Member in database where email in member object matches the email in the database
+         */
+        public function UpdateMember($conn)
+        {
+            $data = [
+                'email' => $this->email,
+                'name' => $this->name,
+                'monthlyNews' => $this->monthlyNews,
+                'breakingNews' => $this->breakingNews,
+                'deleteRequest' => $this->deleteReqest, 
+            ];
+            
+            $query = "UPDATE member SET name=:name, monthlyNews=:monthlyNews, breakingNews=:breakingNews, deleteRequest=:deleteRequest WHERE email=:email";
+            $stmt = $conn->prepare($query);
+            $stmt->execute($data);
         }
     }
     ?>

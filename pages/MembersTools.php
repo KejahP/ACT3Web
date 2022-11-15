@@ -34,37 +34,50 @@
                 echo "<script>console.log('POST: " . $_POST['sEmail'] . "');</script>";
                 echo "<script>console.log('POST: " . $_POST['sName'] . "');</script>";
                 $member = Member::GetMember($conn, $_POST['sEmail'], $_POST['sName']);
+
+                //  Post to MembersUpdateRedirect page
+                //  Email and Name should be hidden fields that are posted
+                if($member->id != null) // I DONT THINK THIS IS WORKING
+                {
+                    echo"
+                    <h3>Name: $member->name</h1>
+                    <h4>Email: $member->email</h2>
+                        <form class='px-4 py-3' action='./MembersUpdateRedirect.php' method='post' target='_self'>    
+                            <div class='mb-3'>
+                                <input type='hidden' class='form-control' id='sEmail' name='sEmail' value='$member->email'>
+                            </div>
+                            <div class='mb-3'>
+                                <input type='hidden' class='form-control' id='sName' name='sName' value='$member->name'>
+                            </div>
+                            <div class='mb-3'>
+                                <div class='form-check'>
+                                    <ul>
+                                        <li>
+                                            <label class='form-check-label' for='sMonthly'>Monthly News Roundup</label>
+                                            <input type='checkbox' class='form-check-input' id='sMonthly' name='sMonthly' ".$member->ToChecked($member->monthlyNews).">
+                                        </li>
+                                        <li>
+                                            <label class='form-check-label' for='sBreaking'>Breaking News</label>
+                                            <input type='checkbox' class='form-check-input' id='sBreaking' name='sBreaking' ".$member->ToChecked($member->breakingNews).">
+                                        </li>
+                                        <li>
+                                            <label class='form-check-label' for='sDelete'>Delete Membership?</label>
+                                            <input type='checkbox' class='form-check-input' id='sDelete' name='sDelete' ".$member->ToChecked($member->deleteRequest).">
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        <input class='btn btn-primary' type='submit'/>
+                    </form>";
+                }
+                else
+                {
+                    echo "<h3>No Member Found</h3>";
+                }
             ?>
 
-            <form class='px-4 py-3' action='.' method='post' target='_self'>
-                <div class='mb-3'>
-                    <label for='sEmail' class='form-label'>Email address</label>
-                    <input type='email' class='form-control' id='sEmail' name='sEmail' placeholder='email@example.com'>
-                </div>
-                <div class='mb-3'>
-                    <label for='sName' class='form-label'>Name</label>
-                    <input type='text' class='form-control' id='sName' name='sName' placeholder='John Doe'>
-                </div>
-                <div class='mb-3'>
-                    <div class='form-check'>
-                        <ul>
-                            <li>
-                                <label class='form-check-label' for='sMonthly'>Monthly News Roundup</label>
-                                <input type='checkbox' class='form-check-input' id='sMonthly' name='sMonthly' value=true>
-                            </li>
-                            <li>
-                                <label class='form-check-label' for='sBreaking'>Breaking News</label>
-                                <input type='checkbox' class='form-check-input' id='sBreaking' name='sBreaking' value=true>
-                            </li>
-                            <li>
-                                <label class='form-check-label' for='sDelete'>Delete Membership?</label>
-                                <input type='checkbox' class='form-check-input' id='sDelete' name='sDelete' value=true>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <input class='btn btn-primary' type='submit'/>
-            </form>
+            
+            
         </main>
     </body>
 

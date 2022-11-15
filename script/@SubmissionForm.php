@@ -46,22 +46,22 @@
                                     <form class='px-4 py-3' action='../pages/MembersTools.php' method='post' target='_self'>
                                         <div class='mb-3'>
                                             <label for='sEmail' class='form-label'>Email address</label>
-                                            <input type='email' class='form-control' id='sEmail' name='sEmail' placeholder='email@example.com'>
+                                            <input type='email' class='form-control' id='sEmail' name='sEmail' placeholder='email@example.com' required>
                                         </div>
                                         <div class='mb-3'>
                                             <label for='sName' class='form-label'>Name</label>
-                                            <input type='text' class='form-control' id='sName' name='sName' placeholder='John Doe'>
+                                            <input type='text' class='form-control' id='sName' name='sName' placeholder='John Doe' required>
                                         </div>
                                         <div class='mb-3'>
                                             <div class='form-check'>
                                                 <ul>
                                                     <li>
                                                         <label class='form-check-label' for='sMonthly'>Monthly News Roundup</label>
-                                                        <input type='checkbox' class='form-check-input' id='sMonthly' name='sMonthly' value=true>
+                                                        <input type='checkbox' class='form-check-input' id='sMonthly' name='sMonthly'>
                                                     </li>
                                                     <li>
                                                         <label class='form-check-label' for='sBreaking'>Breaking News</label>
-                                                        <input type='checkbox' class='form-check-input' id='sBreaking' name='sBreaking' value=true>
+                                                        <input type='checkbox' class='form-check-input' id='sBreaking' name='sBreaking'>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -87,11 +87,11 @@
                                     <form class='px-4 py-3' action='../pages/MembersTools.php' method='post' target='_self'>
                                         <div class='mb-3'>
                                             <label for='sEmail' class='form-label'>Email address</label>
-                                            <input type='email' class='form-control' id='sEmail' name='sEmail' placeholder='email@example.com'>
+                                            <input type='email' class='form-control' id='sEmail' name='sEmail' placeholder='email@example.com' required>
                                         </div>
                                         <div class='mb-3'>
                                             <label for='sName' class='form-label'>Name</label>
-                                            <input type='text' class='form-control' id='sName' name='sName' placeholder='John Doe'>
+                                            <input type='text' class='form-control' id='sName' name='sName' placeholder='John Doe' required>
                                         </div>
                                         <input type='hidden' id='task' name='task' value='updateMember'>
                                         <input class='btn btn-primary' type='submit'/>
@@ -117,9 +117,14 @@
                 {
                     SubmissionForm::SignUpUserToDB($conn);
                 }
-                else
+                else // Update  - Instead of validating here may validate insideof the membersupdate redirect
                 {
-
+                    /*
+                    $member = Member::GetMember($conn, $_POST['sEmail'], $_POST['sName']);
+                    if(isset($member))
+                    {
+                        echo "a";
+                    }*/
                 }
             }
             
