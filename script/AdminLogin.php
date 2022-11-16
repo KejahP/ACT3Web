@@ -2,10 +2,14 @@
     Kejah Pulman
     30034444
 
+    Rhys Gillham
+    M133320
+
     Allows the user to login and acess the memeber
 -->
 <?php
-include_once(dirname(__DIR__) . '/pages/EmailTable.php');
+//This shouldn't be here, it breaks the connection.
+//include_once(dirname(__DIR__) . '/pages/EmailTable.php');
 
         class SubLog
         {

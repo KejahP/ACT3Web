@@ -18,15 +18,13 @@ include_once(dirname(__DIR__) . '/script/AdminLogin.php');
 <header class="">
     <nav class="navStyle row">
         <div class="col p-2">
-        </div>
-        <div class="col p-2">
             <ul class="d-flex align-items-center justify-content-center">
                 <li>
                     <a class="btn" href="../pages/index.php">
                         Home
                     </a>
                 </li>
-                
+
                 <!--Overall browse options-->
                 <li class="dropdown">
                     <button class="btn dropdown-toggle" type="" data-bs-toggle="dropdown">Browse</button>
@@ -127,7 +125,7 @@ include_once(dirname(__DIR__) . '/script/AdminLogin.php');
                 </li>
 
                 <li class="login">
-                        
+
                 </li>
         </div>
         <div class="col p-2">
@@ -153,7 +151,7 @@ include_once(dirname(__DIR__) . '/script/AdminLogin.php');
 
         </div>
 
-         <!--
+        <!--
             Andrew Masar P271838
             Login Drop Down Form
             Drop Down - Ask to either login, or create new account, if creating new add new options, POSSIBLY add new `_POST['isCreating']` boolean value> Can also hide controls based on creating new or not?
@@ -161,51 +159,55 @@ include_once(dirname(__DIR__) . '/script/AdminLogin.php');
             Login must have EmailAddress and Password
         -->
         <div class="col p-2">
+            <div class="row">
+                <div class="col p-2">
+                    <div class="btn-group w-100">
 
-            <!--
-                Button Group for Login Dropdown Menu
-            -->
-            <div class="btn-group w-75"> 
+                        <!--Button, Manually Closable, opens the 'login' dropdown menu-->
+                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                            Members
+                        </button>
 
-                <!--Button, Manually Closable, opens the 'login' dropdown menu-->
-                <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
-                    Members
-                </button>
-                
-                <!--
+                        <!--
                     Drop Down Menu
                     Contain login form, and signup form.
                     If user is not logged in, then option to login should be present
                     Must Contain option to create user as well
                 -->
-                <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuClickable">
-                    <?php
-                    #   Print the Sign Up form html elements into the DropDown menu
-                        SubmissionForm::SignUpForm($conn); 
+                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuClickable">
+                            <?php
+                            #   Print the Sign Up form html elements into the DropDown menu
+                            SubmissionForm::SignUpForm($conn);
 
-                    ?>
-                    <!--
+                            ?>
+                            <!--
                         Log Out
                         If User IS logged in, display Welcome User Name, have link to Members Settings
                     -->
 
-                    <!--
+                            <!--
                         Sign Up Form
                     -->
-                </ul>
-            </div>
-        </div>
+                        </ul>
+                    </div>
+                </div>
                 <div class="col p-2">
-            <div class="btn-group w-75"> 
-                <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
-                    Login
-                </button>
-                <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuClickable">
-                    <?php
-                        SubLog::Login($conn);
-                    ?>
-                </ul>
+                    <div class="btn-group w-75">
+                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                            Login
+                        </button>
+                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuClickable">
+                            <?php
+                            SubLog::Login($conn);
+                            ?>
+                        </ul>
+                    </div>
+                </div>
             </div>
+            <!--
+                Button Group for Login Dropdown Menu
+            -->
+
         </div>
     </nav>
 </header>

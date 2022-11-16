@@ -10,7 +10,7 @@
 
 <?php
 $servername = "localhost";
-$username = "user";
+$username = "root";
 //$username = "root";
 $dbname = "paintingdb";
 

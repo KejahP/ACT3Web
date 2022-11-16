@@ -99,7 +99,7 @@
                 'name' => $this->name,
                 'monthlyNews' => $this->monthlyNews,
                 'breakingNews' => $this->breakingNews,
-                'deleteRequest' => $this->deleteReqest, 
+                'deleteRequest' => $this->deleteRequest, 
             ];
             
             $query = "UPDATE member SET name=:name, monthlyNews=:monthlyNews, breakingNews=:breakingNews, deleteRequest=:deleteRequest WHERE email=:email";
