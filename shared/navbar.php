@@ -169,25 +169,15 @@ include_once(dirname(__DIR__) . '/script/AdminLogin.php');
                         </button>
 
                         <!--
-                    Drop Down Menu
-                    Contain login form, and signup form.
-                    If user is not logged in, then option to login should be present
-                    Must Contain option to create user as well
-                -->
+                        Drop Down Menu
+                        Contain login form, and signup form.
+                        -->
                         <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuClickable">
                             <?php
                             #   Print the Sign Up form html elements into the DropDown menu
                             SubmissionForm::SignUpForm($conn);
 
                             ?>
-                            <!--
-                        Log Out
-                        If User IS logged in, display Welcome User Name, have link to Members Settings
-                    -->
-
-                            <!--
-                        Sign Up Form
-                    -->
                         </ul>
                     </div>
                 </div>
