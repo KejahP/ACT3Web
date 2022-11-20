@@ -106,5 +106,17 @@
             $stmt = $conn->prepare($query);
             $stmt->execute($data);
         }
+
+        public static function ConvertCheckbox($checked){
+            if($checked == '1'){
+            echo "<td scope = 'row'>
+                <input type='checkbox' disabled checked >
+            </td>";
+            }
+            else{
+            echo "<td scope = 'row'>
+                <input type='checkbox' disabled >
+            </td>";
+            }
+        }
     }
-    ?>

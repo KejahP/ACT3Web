@@ -15,6 +15,7 @@
 include_once(dirname(__DIR__) . '/script/connection.php');
 include_once(dirname(__DIR__) . '/shared/head.php');
 include_once(dirname(__DIR__) . '/shared/navbar.php');
+include_once(dirname(__DIR__)) . '/script/MemberModel.php';
 
 $sqlEmail = "SELECT * FROM member ORDER BY member.deleteRequest DESC, member.email";
 $breaking = 0;
@@ -91,9 +92,10 @@ elseif(isset($_POST['Delete'])){
                 echo "<td scope = \"row\">" . $row['name'] . "</td>";
                 echo "<td scope = \"row\">" . $row['email'] . "</td>";
 
-                echo "<td scope = \"row\">" . $row['monthlyNews'] . "</td>";
-                echo "<td scope = \"row\">" . $row['breakingNews'] . "</td>";
-                echo "<td scope = \"row\">" . $row['deleteRequest'] . "</td>";
+                Member::ConvertCheckbox($row['monthlyNews']);
+                Member::ConvertCheckbox($row['breakingNews']);
+                Member::ConvertCheckbox($row['deleteRequest']);
+                
                 echo "<td scope='row'> 
                         <form action='EmailTable.php' method='post'>
                         <input hidden type='text' name='Delete' value='delete'>
