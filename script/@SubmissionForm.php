@@ -1,34 +1,27 @@
 <?php
-/*
-     █████╗ ███╗   ██╗██████╗ ██████╗ ███████╗██╗    ██╗    ███╗   ███╗ █████╗ ███████╗ █████╗ ██████╗     ██████╗ ██████╗ ███████╗ ██╗ █████╗ ██████╗  █████╗ 
-    ██╔══██╗████╗  ██║██╔══██╗██╔══██╗██╔════╝██║    ██║    ████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗╚════██╗╚════██║███║██╔══██╗╚════██╗██╔══██╗
-    ███████║██╔██╗ ██║██║  ██║██████╔╝█████╗  ██║ █╗ ██║    ██╔████╔██║███████║███████╗███████║██████╔╝    ██████╔╝ █████╔╝    ██╔╝╚██║╚█████╔╝ █████╔╝╚█████╔╝
-    ██╔══██║██║╚██╗██║██║  ██║██╔══██╗██╔══╝  ██║███╗██║    ██║╚██╔╝██║██╔══██║╚════██║██╔══██║██╔══██╗    ██╔═══╝ ██╔═══╝    ██╔╝  ██║██╔══██╗ ╚═══██╗██╔══██╗
-    ██║  ██║██║ ╚████║██████╔╝██║  ██║███████╗╚███╔███╔╝    ██║ ╚═╝ ██║██║  ██║███████║██║  ██║██║  ██║    ██║     ███████╗   ██║   ██║╚█████╔╝██████╔╝╚█████╔╝
-    ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝     ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝     ╚══════╝   ╚═╝   ╚═╝ ╚════╝ ╚═════╝  ╚════╝
- */
+/**
+*      █████╗ ███╗   ██╗██████╗ ██████╗ ███████╗██╗    ██╗    ███╗   ███╗ █████╗ ███████╗ █████╗ ██████╗     ██████╗ ██████╗ ███████╗ ██╗ █████╗ ██████╗  █████╗ 
+*    ██╔══██╗████╗  ██║██╔══██╗██╔══██╗██╔════╝██║    ██║    ████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗╚════██╗╚════██║███║██╔══██╗╚════██╗██╔══██╗
+*   ███████║██╔██╗ ██║██║  ██║██████╔╝█████╗  ██║ █╗ ██║    ██╔████╔██║███████║███████╗███████║██████╔╝    ██████╔╝ █████╔╝    ██╔╝╚██║╚█████╔╝ █████╔╝╚█████╔╝
+*  ██╔══██║██║╚██╗██║██║  ██║██╔══██╗██╔══╝  ██║███╗██║    ██║╚██╔╝██║██╔══██║╚════██║██╔══██║██╔══██╗    ██╔═══╝ ██╔═══╝    ██╔╝  ██║██╔══██╗ ╚═══██╗██╔══██╗
+* ██║  ██║██║ ╚████║██████╔╝██║  ██║███████╗╚███╔███╔╝    ██║ ╚═╝ ██║██║  ██║███████║██║  ██║██║  ██║    ██║     ███████╗   ██║   ██║╚█████╔╝██████╔╝╚█████╔╝
+*╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝     ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝     ╚══════╝   ╚═╝   ╚═╝ ╚════╝ ╚═════╝  ╚════╝
+*   Andrew Masar P271838
+*   Submission Form
+*   The Purpose of this class is to contain all the required functions for a user to Submit thier information to the Mailing List 
+*/
 
 /**
- * Andrew Masar P271838
- * Submission Form
- * The Purpose of this class is to contain all the required functions for a user to Submit thier information to the Mailing List 
+ * 
  */
     class SubmissionForm
     {
-
-        // Print a List Item containing a sign up form for signing up to the mailing list
         /**
          * SignUpForm
          * Return the Formgroup used for adding a new entry into the mailing list in the db.
          */
-        public static function SignUpForm($conn) // `action='#' posts the information back to the same page with a '#' empty fragment indentifier, no action posts back to same page
+        public static function SignUpForm($conn)
         {
-            /*  Perhaps Wrap Form In Collapse?
-                Perhaps change Action to redirect towards an I frame, inside of the drop down instead of refreshing entire page?
-                TO DO:
-                * Place Iframe within DropDown
-                * Replace change target to Iframe OR action to Iframe, whatever gets best results. Change contents of Iframe to "Subsription Confirmed" OR "Already Subscribed"
-            */
             echo"
                 <li>
                     <div class='accordion accordion-flush' id='dropDownAccordion'>";
@@ -105,7 +98,6 @@
 
             // If task is equal to create member than Perform Create Query
             SubmissionForm::SelectMethod($conn); 
-            //SubmissionForm::SignUpUserToDB($conn);
         }
 
         //  Selects the correct method to call based on the task that has been posted
@@ -117,17 +109,7 @@
                 {
                     SubmissionForm::SignUpUserToDB($conn);
                 }
-                else // Update  - Instead of validating here may validate insideof the membersupdate redirect
-                {
-                    /*
-                    $member = Member::GetMember($conn, $_POST['sEmail'], $_POST['sName']);
-                    if(isset($member))
-                    {
-                        echo "a";
-                    }*/
-                }
-            }
-            
+            }     
         }
 
         //<button type='submit' class='btn btn-primary'>Sign Up</button>
@@ -158,7 +140,8 @@
                     'email' => $_POST['sEmail'],
                     'monthlyNews' => $monthly,
                     'breakingNews' => $breaking,
-                    'deleteRequest' => 0,
+                    'deleteRequest' => "false",
+                    //'deleteRequest' => 0,
                 ];
 
                 $stmt = $conn->prepare($insertEmailQuery);

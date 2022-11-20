@@ -17,14 +17,6 @@
     include_once(dirname(__DIR__) . '/script/sql_commands.php');
     include_once(dirname(__DIR__) . '/script/MemberModel.php');
 
-        
-    /*
-        TO DO:
-            * Populate this page with the update functionality for the Members db
-            * 
-    */
-
-
     ?>
     <body>
         <?php include_once(dirname(__DIR__) . '/shared/navbar.php');?>
@@ -33,21 +25,75 @@
                 //  Get the Member
                 echo "<script>console.log('POST: " . $_POST['sEmail'] . "');</script>";
                 echo "<script>console.log('POST: " . $_POST['sName'] . "');</script>";
+                echo "<script>console.log('POST: " . isset($_POST['update']) . "');</script>";
+
                 $member = Member::GetMember($conn, $_POST['sEmail'], $_POST['sName']);
 
-                //  Post to MembersUpdateRedirect page
-                //  Email and Name should be hidden fields that are posted
-                if($member->id != null) // I DONT THINK THIS IS WORKING
+
+                if(isset($_POST['update']))
+                {
+                    //  Convert Check Box State to Integer/Boolean/TinyInt stupid bullshit
+                    //  If `sMonthly` has been POSTed
+                    if (isset($_POST['sMonthly']))
+                    {
+                        $member->monthlyNews = 1;
+                    }
+                    else
+                    {
+                        $member->monthlyNews = 0;
+                    }
+
+                    //  If `sBreaking` has been POSTed
+                    if (isset($_POST['sBreaking']))
+                    {
+                        $member->breakingNews = 1;
+                    }
+                    else
+                    {
+                        $member->breakingNews = 0;
+                    }
+
+                    //  If `sDelete` has been POSTed
+                    if (isset($_POST['sDelete']))
+                    {
+                        $member->deleteRequest = 1;
+                    }
+                    else
+                    {
+                        $member->deleteRequest = 0;
+                    }
+
+                    $member->UpdateMember($conn);
+                }
+
+
+                echo "<script>console.log('POST: " . $member->id . "');</script>";
+                echo "<script>console.log('POST: " . $member->email . "');</script>";
+                echo "<script>console.log('POST: " . $member->name . "');</script>";
+                echo "<script>console.log('POST: " . $member->monthlyNews . "');</script>";
+                echo "<script>console.log('POST: " . $member->breakingNews . "');</script>";
+                echo "<script>console.log('POST: " . $member->deleteRequest . "');</script>";
+                
+
+                //  Post to MembersUpdateRedirect page -    Convert Member's Monthly, Breaking and Delete fields to 'checked' or unchecked  MAY NOT BE POSTING CORRECTLY
+                if($member->id != null) 
                 {
                     echo"
                     <h3>Name: $member->name</h1>
                     <h4>Email: $member->email</h2>
-                        <form class='px-4 py-3' action='./MembersUpdateRedirect.php' method='post' target='_self'>    
+                    ";
+                    //echo"<form class='px-4 py-3' action='./MembersUpdateRedirect.php' method='post' target='_self'>";    
+                        //  Test Solution below, redirect back to members tools, POST Inside of members tools
+                        echo "
+                        <form class='px-4 py-3' action='./MembersTools.php' method='post' target='_self'>
                             <div class='mb-3'>
                                 <input type='hidden' class='form-control' id='sEmail' name='sEmail' value='$member->email'>
                             </div>
                             <div class='mb-3'>
                                 <input type='hidden' class='form-control' id='sName' name='sName' value='$member->name'>
+                            </div>
+                            <div class='mb-3'>
+                                <input type='hidden' class='form-control' id='update' name='update' value='update'> 
                             </div>
                             <div class='mb-3'>
                                 <div class='form-check'>
@@ -67,17 +113,16 @@
                                     </ul>
                                 </div>
                             </div>
-                        <input class='btn btn-primary' type='submit'/>
-                    </form>";
+                            <input class='btn btn-primary' type='submit'/>
+                        </form>";
+
+                        
                 }
                 else
                 {
                     echo "<h3>No Member Found</h3>";
-                }
+                }               
             ?>
-
-            
-            
         </main>
     </body>
 

@@ -1,5 +1,17 @@
 <?php
     /**
+     *   █████╗ ███╗   ██╗██████╗ ██████╗ ███████╗██╗    ██╗    ███╗   ███╗ █████╗ ███████╗ █████╗ ██████╗     ██████╗ ██████╗ ███████╗ ██╗ █████╗ ██████╗  █████╗ 
+     *  ██╔══██╗████╗  ██║██╔══██╗██╔══██╗██╔════╝██║    ██║    ████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔══██╗╚════██╗╚════██║███║██╔══██╗╚════██╗██╔══██╗
+     *  ███████║██╔██╗ ██║██║  ██║██████╔╝█████╗  ██║ █╗ ██║    ██╔████╔██║███████║███████╗███████║██████╔╝    ██████╔╝ █████╔╝    ██╔╝╚██║╚█████╔╝ █████╔╝╚█████╔╝
+     *  ██╔══██║██║╚██╗██║██║  ██║██╔══██╗██╔══╝  ██║███╗██║    ██║╚██╔╝██║██╔══██║╚════██║██╔══██║██╔══██╗    ██╔═══╝ ██╔═══╝    ██╔╝  ██║██╔══██╗ ╚═══██╗██╔══██╗
+     *  ██║  ██║██║ ╚████║██████╔╝██║  ██║███████╗╚███╔███╔╝    ██║ ╚═╝ ██║██║  ██║███████║██║  ██║██║  ██║    ██║     ███████╗   ██║   ██║╚█████╔╝██████╔╝╚█████╔╝
+     *  ╚═╝  ╚═╝╚═╝  ╚═══╝╚═════╝ ╚═╝  ╚═╝╚══════╝ ╚══╝╚══╝     ╚═╝     ╚═╝╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝     ╚══════╝   ╚═╝   ╚═╝ ╚════╝ ╚═════╝  ╚════╝
+     *
+     *  MemberModel
+     *  Provides the Model, and associated methods for the member class
+     */
+        
+    /**
      * Member
      * Member Object for Pulling Entries from the database
      */
@@ -31,11 +43,11 @@
         {
             if($input == 1)
             {
-                return "checked='checked'";
+                return "checked";
             }
             else
             {
-                return 0;
+                return null;
             }
         }
 
@@ -65,44 +77,31 @@
                 $id = $row['id'];
                 $name = $row['name'];
                 $email = $row['email'];
-                $monthly = 0;
-                $breaking = 0;
-                $delete = 0;
 
-                if($row['monthlyNews'] == 1)
-                {
-                    $monthly = 1;
-                }
-                if($row['breakingNews'] == 1)
-                {
-                    $breaking = 1;
-                }
-                if($row['deleteRequest'] == 1)
-                {
-                    $delete = 1;
-                }
+                $monthly = $row['monthlyNews'];
+                $breaking = $row['breakingNews'];
+                $delete = $row['deleteRequest'];
 
                 return $member = member::FromRow($id, $name, $email, $monthly, $breaking, $delete);            
             }
 
-            //return $member;
         }
 
         /**
          * Update Member
          * Update Member in database where email in member object matches the email in the database
+         * UPDATE NAME UNNECESARY
          */
         public function UpdateMember($conn)
         {
             $data = [
                 'email' => $this->email,
-                'name' => $this->name,
                 'monthlyNews' => $this->monthlyNews,
                 'breakingNews' => $this->breakingNews,
                 'deleteRequest' => $this->deleteRequest, 
             ];
             
-            $query = "UPDATE member SET name=:name, monthlyNews=:monthlyNews, breakingNews=:breakingNews, deleteRequest=:deleteRequest WHERE email=:email";
+            $query = "UPDATE member SET monthlyNews=:monthlyNews, breakingNews=:breakingNews, deleteRequest=:deleteRequest WHERE email=:email";
             $stmt = $conn->prepare($query);
             $stmt->execute($data);
         }
