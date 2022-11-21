@@ -131,7 +131,7 @@ include_once(dirname(__DIR__) . '/script/AdminLogin.php');
         <div class="col p-2">
             <!--Overall Search options-->
             <form class="d-flex searchSizing" action="../script/search_method.php" method="post">
-                <input class="form-control" placeholder="Search" type="search" name="search">
+                <input class="form-control-sm" placeholder="Search" type="search" name="search">
                 <div>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" name="flexRadioSearch" id="flexRadioPainting" value="painting" checked>
@@ -158,13 +158,13 @@ include_once(dirname(__DIR__) . '/script/AdminLogin.php');
             Sign up must have Name, EmailAddress, Password, and Two Check Boxes for Monthly News and Breaking News
             Login must have EmailAddress and Password
         -->
-        <div class="col p-2">
+        <div class="col-lg p-2">
             <div class="row">
                 <div class="col p-2">
                     <div class="btn-group w-100">
 
                         <!--Button, Manually Closable, opens the 'login' dropdown menu-->
-                        <button class="btn btn-secondary dropdown-toggle w-100" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuClickable" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
                             Members
                         </button>
 
@@ -172,7 +172,7 @@ include_once(dirname(__DIR__) . '/script/AdminLogin.php');
                         Drop Down Menu
                         Contain login form, and signup form.
                         -->
-                        <ul class="dropdown-menu w-100" aria-labelledby="dropdownMenuClickable">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuClickable">
                             <?php
                             #   Print the Sign Up form html elements into the DropDown menu
                             SubmissionForm::SignUpForm($conn);

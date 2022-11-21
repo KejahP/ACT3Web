@@ -42,7 +42,7 @@ class painting
   //Return Image as HTML Element
   function createImage($height, $width)
   {
-    return '<img src = "data:image/png;base64,' . base64_encode($this->image) . '" width = "' . $width . '" height = "' . $height . '"/>';
+    return '<img alt="A painting called ' . $this->name . '" src = "data:image/png;base64,' . base64_encode($this->image) . '" width = "' . $width . '" height = "' . $height . '"/>';
   }
 
   //Returns the update webpage for the painting model along.

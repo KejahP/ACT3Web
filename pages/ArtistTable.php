@@ -81,7 +81,7 @@ include_once(dirname(__DIR__) . '/shared/head.php');
             {
                 echo "<tr>";
                 echo "<td scope = \"row\">" . $row['artistName'] . "</td>";
-                echo "<td scope = \"row\">" . '<img src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 300px" . "height = 300px"/>' . "</td>";
+                echo "<td scope = \"row\">" . '<img alt="An image of '.$row['artistName'].'" src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 300px" . "height = 300px"/>' . "</td>";
                 echo "<td scope = \"row\">" . $row['style'] . "</td>";
                 echo "<td scope = \"row\">" . $row['lifeSpan'] . "</td>";
                 echo '<td> <a class=\'btn btn-primary\' method="post" href="ArtistFiltered.php?id=' . $row['artistID'] . '">Go To</a>';

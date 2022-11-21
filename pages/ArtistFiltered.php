@@ -80,7 +80,7 @@ elseif ($task == "search")
                 echo '<tr>';
                 echo "<td scope = \"row\">" . $row['artistName'];
                 echo "</td>";
-                echo "<td scope = \"row\">" . '<img src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 450px" . "height = 450px"/>' . "</td>";
+                echo "<td scope = \"row\">" . '<img alt="An image of ' . $row['artistName'] . '" src = "data:image/png;base64,' . base64_encode($row['imageFile']) . '" width = 450px" . "height = 450px"/>' . "</td>";
                 echo "<td scope = \"row\">" . $row['style'] . "</td>";
                 echo "<td scope = \"row\">" . $row['lifeSpan'] . "</td>";
                 echo '</tr>';
